@@ -1,0 +1,11 @@
+{
+	"extensionName": {
+		"message": "Link Properties Plus WE"
+	},
+	"extensionDescription": {
+		"message": "Adds private tabs"
+	},
+	"linkProperties": {
+		"message": "Link Properties"
+	}
+}

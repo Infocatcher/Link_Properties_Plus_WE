@@ -1,0 +1,11 @@
+{
+	"extensionName": {
+		"message": "Link Properties Plus WE"
+	},
+	"extensionDescription": {
+		"message": "Добавляет приватные вкладки"
+	},
+	"linkProperties": {
+		"message": "Свойства ссылки"
+	}
+}
