@@ -1,0 +1,1 @@
+WebExtensions port of <a href="https://github.com/Infocatcher/Link_Properties_Plus">Link Properties Plus</a> extension for Firefox/SeaMonkey/Thunderbird (see <a href="https://github.com/Infocatcher/Link_Properties_Plus/issues/27">Link_Properties_Plus#27</a>).
