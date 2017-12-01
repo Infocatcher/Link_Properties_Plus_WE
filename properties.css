@@ -1,0 +1,11 @@
+.grid {
+	display: grid;
+	grid-gap: 0.3em;
+	align-items: safe center;
+}
+#input {
+	grid-template-columns: max-content auto max-content;
+}
+#output {
+	grid-template-columns: max-content auto;
+}

@@ -1,4 +1,13 @@
-var params = new URL(location).searchParams;
-var url = params.get("url");
+var lppOptions = {
+	init: function() {
+		var params = new URL(location).searchParams;
+		$("url").value = params.get("url");
+		$("referer").value = params.get("referer");
+	}
+};
 
-document.body.textContent = url;
+function $(id) {
+	return document.getElementById(id);
+}
+
+lppOptions.init();

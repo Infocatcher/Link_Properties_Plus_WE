@@ -3,8 +3,36 @@
 <head>
 	<title>Link Properties</title>
 	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="properties.css" />
 </head>
 <body>
+	<div id="input" class="grid">
+		<label for="url">Link:</label>
+		<input id="url" type="text" />
+		<button>Get Properties</button>
+
+		<label for="referer">Referer:</label>
+		<input id="referer" type="text" />
+		<button>Options</button>
+	</div>
+
+	<div id="output" class="grid">
+		<label>File Size:</label>
+		<span class="value"></span>
+
+		<label>Last Modified:</label>
+		<span class="value"></span>
+
+		<label>Content Type:</label>
+		<span class="value"></span>
+
+		<label>Status:</label>
+		<span class="value"></span>
+
+		<label>Direct Link:</label>
+		<span class="value"></span>
+	</div>
+
 	<script src="properties.js"></script>
 </body>
 </html>
