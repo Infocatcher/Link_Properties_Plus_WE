@@ -1,3 +1,23 @@
+/* System-like styles */
+html {
+	/*
+	background-color: -moz-Dialog;
+	color: -moz-DialogText;
+	*/
+	background-color: Menu;
+	color: MenuText;
+}
+html, button {
+	font: message-box;
+}
+body {
+	margin: 10px;
+}
+label {
+	margin: 1px 5px;
+}
+
+/* UI */
 .grid {
 	display: grid;
 	grid-gap: 0.3em;
