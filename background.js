@@ -26,23 +26,25 @@ browser.contextMenus.create({
 browser.contextMenus.onClicked.addListener(function(info, tab) {
 	var miId = info.menuItemId;
 	_log("contextMenus.onClicked: " + miId);
-	openLinkProperties(info.linkUrl, tab);
+	openLinkProperties(info.linkUrl, info.frameUrl, tab);
 });
 
 
 browser.browserAction.onClicked.addListener(function() {
 	_log("browserAction.onClicked");
 	browser.tabs.query({ currentWindow: true, active: true }).then(function(tabsInfo) {
-		openLinkProperties("", tabsInfo[0]);
+		openLinkProperties("", "", tabsInfo[0]);
 	}, _err);
 });
 //browser.commands.onCommand.addListener(function(command) {
 //	_log("commands.onCommand: " + command);
 //});
 
-function openLinkProperties(url, sourceTab) {
+function openLinkProperties(url, ref, sourceTab) {
 	browser.windows.create({
-		url: browser.extension.getURL("properties.html") + "?url=" + encodeURIComponent(url),
+		url: browser.extension.getURL("properties.html")
+			+ "?url=" + encodeURIComponent(url)
+			+ "&referer=" + encodeURIComponent(ref || sourceTab.url),
 		type: "popup",
 		width: 640,
 		height: 480
