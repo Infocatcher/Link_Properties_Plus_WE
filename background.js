@@ -2,6 +2,7 @@ const LOG_PREFIX = "[Link Properties Plus WE] ";
 
 var prefs = {
 	debug: true,
+	windowPosition: {}
 };
 browser.storage.local.get().then(function(o) {
 	browser.storage.onChanged.addListener(function(changes, area) {
@@ -41,13 +42,16 @@ browser.browserAction.onClicked.addListener(function() {
 //});
 
 function openLinkProperties(url, ref, sourceTab) {
+	var p = prefs.windowPosition || {};
 	browser.windows.create({
 		url: browser.extension.getURL("properties.html")
 			+ "?url=" + encodeURIComponent(url)
 			+ "&referer=" + encodeURIComponent(ref || sourceTab.url),
 		type: "popup",
-		width: 640,
-		height: 480
+		left:   p.x || 0,
+		top:    p.y || 0,
+		width:  p.w || 640,
+		height: p.h || 480
 	});
 }
 
