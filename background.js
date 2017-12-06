@@ -46,13 +46,16 @@ function openLinkProperties(url, ref, sourceTab) {
 	browser.windows.create({
 		url: browser.extension.getURL("properties.html")
 			+ "?url=" + encodeURIComponent(url)
-			+ "&referer=" + encodeURIComponent(ref || sourceTab.url),
+			+ "&referer=" + encodeURIComponent(safeReferrer(ref || sourceTab.url)),
 		type: "popup",
 		left:   p.x || 0,
 		top:    p.y || 0,
 		width:  p.w || 640,
 		height: p.h || 480
 	});
+}
+function safeReferrer(ref) {
+	return /^(?:ftps?|https?):\//i.test(ref) ? ref : "";
 }
 
 function notify(msg) {
