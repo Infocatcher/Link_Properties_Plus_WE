@@ -15,10 +15,11 @@
 		"scripts": ["background.js"]
 	},
 	"permissions": [
+		"<all_urls>",
+		"tabs",
 		"contextMenus",
 		"storage",
-		"notifications",
-		"tabs"
+		"notifications"
 	],
 
 	"browser_action": {
