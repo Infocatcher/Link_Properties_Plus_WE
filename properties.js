@@ -57,6 +57,16 @@ function showProperties(request) {
 
 	var direct = request.responseURL;
 	$("direct").textContent = direct;
+
+	var headers = request.getAllResponseHeaders() || "";
+	$("headers").innerHTML = headers.split(/[\r\n]+/).map(function(line) {
+		if(/^([^:]+)\s*:\s*(.*)$/.test(line)) {
+			return '<strong class="name">' + safeHTML(RegExp.$1) + '</strong>'
+				+ '<span class="colon">: </span>'
+				+ '<span class="value">' + safeHTML(RegExp.$2) + '</span>'
+		}
+		return '<span class="buggy">' + safeHTML(line) + '</span>';
+	}).join("<br/>\n");
 }
 
 function openOptions() {
@@ -65,4 +75,11 @@ function openOptions() {
 
 function $(id) {
 	return document.getElementById(id);
+}
+function safeHTML(s) {
+	return s
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;");
 }
