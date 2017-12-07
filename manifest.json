@@ -17,6 +17,8 @@
 	"permissions": [
 		"<all_urls>",
 		"tabs",
+		"webRequest",
+		"webRequestBlocking",
 		"contextMenus",
 		"storage",
 		"notifications"

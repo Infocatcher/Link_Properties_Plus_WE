@@ -18,6 +18,11 @@ browser.storage.local.get().then(function(o) {
 	}, 5000);
 }, _err);
 
+browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
+	if(msg.action == "getTabId")
+		sendResponse(sender.tab && sender.tab.id);
+});
+
 browser.contextMenus.create({
 	id: "linkProperties",
 	title: browser.i18n.getMessage("linkProperties"),

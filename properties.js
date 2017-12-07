@@ -27,16 +27,41 @@ addEventListener("unload", function() {
 function getProperties() {
 	var url = $("url").value;
 	var referer = $("referer").value;
-	sendRequest(url, referer);
+	getTabId(function(tabId) {
+		sendRequest(url, referer, tabId);
+	});
 }
-function sendRequest(url, referer) {
+function sendRequest(url, referer, tabId) {
 	var request = new XMLHttpRequest();
 	request.open("HEAD", url, true);
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
-	referer && request.setRequestHeader("Referer", referer);
+	//referer && request.setRequestHeader("Referer", referer);
+
+	var filter = {
+		urls: ["<all_urls>"],
+		tabId: tabId
+	};
+	function onBeforeSendHeaders(e) {
+		var headers = e.requestHeaders;
+		(function getRefererHeader() {
+			for(var header of headers)
+				if(header.name.toLowerCase() == "referer")
+					return header;
+			headers.push((header = { name: "Referer" }));
+			return header;
+		})().value = referer;
+		return { requestHeaders: headers };
+	}
+	browser.webRequest.onBeforeSendHeaders.addListener(
+		onBeforeSendHeaders,
+		filter,
+		["blocking", "requestHeaders"]
+	);
+
 	request.send();
 	request.onreadystatechange = function() {
 		if(this.readyState == this.HEADERS_RECEIVED) {
+			browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
 			showProperties(request);
 			request.abort();
 		}
@@ -71,6 +96,13 @@ function showProperties(request) {
 
 function openOptions() {
 	browser.runtime.openOptionsPage();
+}
+function getTabId(callback) {
+	browser.runtime.sendMessage({
+		action: "getTabId"
+	}).then(function onResponse(tabId) {
+		callback(tabId);
+	}, console.error);
 }
 
 function $(id) {
