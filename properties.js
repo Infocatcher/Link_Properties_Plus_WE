@@ -56,9 +56,7 @@ function sendRequest(url, referer, tabId) {
 		var block = document.createElement("div");
 		block.className = "block";
 		block.innerHTML = e.requestHeaders.map(function(header) {
-			return '<strong class="name">' + safeHTML(header.name) + '</strong>'
-				+ '<span class="colon">: </span>'
-				+ '<span class="value">' + safeHTML(header.value) + '</span>';
+			return headerHTML(header.name, header.value);
 		}).join("<br/>\n");
 		$("headers").appendChild(block);
 		var spacer = document.createElement("div");
@@ -107,11 +105,8 @@ function showProperties(request) {
 	var block = document.createElement("div");
 	block.className = "block";
 	block.innerHTML = headers.split(/[\r\n]+/).map(function(line) {
-		if(/^([^:]+)\s*:\s*(.*)$/.test(line)) {
-			return '<strong class="name">' + safeHTML(RegExp.$1) + '</strong>'
-				+ '<span class="colon">: </span>'
-				+ '<span class="value">' + safeHTML(RegExp.$2) + '</span>';
-		}
+		if(/^([^:]+)\s*:\s*(.*)$/.test(line))
+			return headerHTML(RegExp.$1, RegExp.$2);
 		return '<span class="buggy">' + safeHTML(line) + '</span>';
 	}).join("<br/>\n");
 	$("headers").appendChild(block);
@@ -130,6 +125,11 @@ function getTabId(callback) {
 
 function $(id) {
 	return document.getElementById(id);
+}
+function headerHTML(name, val) {
+	return '<strong class="name">' + safeHTML(name) + '</strong>'
+		+ '<span class="colon">: </span>'
+		+ '<span class="value">' + safeHTML(val) + '</span>';
 }
 function safeHTML(s) {
 	return s
