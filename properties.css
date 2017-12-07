@@ -29,3 +29,9 @@ label {
 #output {
 	grid-template-columns: max-content auto;
 }
+
+#headers .spacer {
+	overflow: hidden;
+	height: 0.8em;
+	max-height: 0.8em;
+}

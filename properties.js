@@ -52,16 +52,36 @@ function sendRequest(url, referer, tabId) {
 		})().value = referer;
 		return { requestHeaders: headers };
 	}
+	function onSendHeaders(e) {
+		var block = document.createElement("div");
+		block.className = "block";
+		block.innerHTML = e.requestHeaders.map(function(header) {
+			return '<strong class="name">' + safeHTML(header.name) + '</strong>'
+				+ '<span class="colon">: </span>'
+				+ '<span class="value">' + safeHTML(header.value) + '</span>';
+		}).join("<br/>\n");
+		$("headers").appendChild(block);
+		var spacer = document.createElement("div");
+		spacer.className = "spacer";
+		spacer.appendChild(document.createElement("br"));
+		$("headers").appendChild(spacer);
+	}
 	browser.webRequest.onBeforeSendHeaders.addListener(
 		onBeforeSendHeaders,
 		filter,
 		["blocking", "requestHeaders"]
+	);
+	browser.webRequest.onSendHeaders.addListener(
+		onSendHeaders,
+		filter,
+		["requestHeaders"]
 	);
 
 	request.send();
 	request.onreadystatechange = function() {
 		if(this.readyState == this.HEADERS_RECEIVED) {
 			browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
+			browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
 			showProperties(request);
 			request.abort();
 		}
@@ -84,14 +104,17 @@ function showProperties(request) {
 	$("direct").textContent = direct;
 
 	var headers = request.getAllResponseHeaders() || "";
-	$("headers").innerHTML = headers.split(/[\r\n]+/).map(function(line) {
+	var block = document.createElement("div");
+	block.className = "block";
+	block.innerHTML = headers.split(/[\r\n]+/).map(function(line) {
 		if(/^([^:]+)\s*:\s*(.*)$/.test(line)) {
 			return '<strong class="name">' + safeHTML(RegExp.$1) + '</strong>'
 				+ '<span class="colon">: </span>'
-				+ '<span class="value">' + safeHTML(RegExp.$2) + '</span>'
+				+ '<span class="value">' + safeHTML(RegExp.$2) + '</span>';
 		}
 		return '<span class="buggy">' + safeHTML(line) + '</span>';
 	}).join("<br/>\n");
+	$("headers").appendChild(block);
 }
 
 function openOptions() {
