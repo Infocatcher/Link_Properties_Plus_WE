@@ -32,26 +32,27 @@ browser.contextMenus.create({
 browser.contextMenus.onClicked.addListener(function(info, tab) {
 	var miId = info.menuItemId;
 	_log("contextMenus.onClicked: " + miId);
-	openLinkProperties(info.linkUrl, info.frameUrl, tab);
+	openLinkProperties(info.linkUrl, info.frameUrl, tab, true);
 });
 
 
 browser.browserAction.onClicked.addListener(function() {
 	_log("browserAction.onClicked");
 	browser.tabs.query({ currentWindow: true, active: true }).then(function(tabsInfo) {
-		openLinkProperties("", "", tabsInfo[0]);
+		openLinkProperties("", tabsInfo[0].url, tabsInfo[0]);
 	}, _err);
 });
 //browser.commands.onCommand.addListener(function(command) {
 //	_log("commands.onCommand: " + command);
 //});
 
-function openLinkProperties(url, ref, sourceTab) {
+function openLinkProperties(url, ref, sourceTab, autoStart) {
 	var p = prefs.windowPosition || {};
 	browser.windows.create({
 		url: browser.extension.getURL("properties.html")
 			+ "?url=" + encodeURIComponent(url)
-			+ "&referer=" + encodeURIComponent(safeReferrer(ref || sourceTab.url)),
+			+ "&referer=" + encodeURIComponent(safeReferrer(ref))
+			+ "&autostart=" + +!!autoStart,
 		type: "popup",
 		left:   p.x || 0,
 		top:    p.y || 0,

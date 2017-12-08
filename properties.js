@@ -1,6 +1,8 @@
 var params = new URL(location).searchParams;
 $("url").value = params.get("url");
 $("referer").value = params.get("referer");
+if(params.get("autostart") == 1)
+	getProperties();
 
 var handlers = {
 	get: getProperties,
