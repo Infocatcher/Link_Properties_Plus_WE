@@ -29,6 +29,8 @@ addEventListener("unload", function() {
 function getProperties() {
 	var url = $("url").value;
 	var referer = $("referer").value;
+	for(var node of $("output").getElementsByClassName("value"))
+		node.textContent = "";
 	getTabId(function(tabId) {
 		sendRequest(url, referer, tabId);
 	});
