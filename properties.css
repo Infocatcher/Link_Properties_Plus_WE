@@ -21,13 +21,14 @@ label {
 .grid {
 	display: grid;
 	grid-gap: 0.3em;
-	align-items: safe center;
 }
 #input {
 	grid-template-columns: max-content auto max-content;
+	align-items: safe center;
 }
 #output {
 	grid-template-columns: max-content auto;
+	align-items: first baseline;
 }
 
 #headers .spacer {
