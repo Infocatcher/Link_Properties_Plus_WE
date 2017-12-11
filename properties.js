@@ -30,7 +30,7 @@ function getProperties() {
 	var url = $("url").value;
 	var referer = $("referer").value;
 	for(var node of $("output").getElementsByClassName("value"))
-		node.textContent = "";
+		node.textContent = node.title = "";
 	getTabId(function(tabId) {
 		sendRequest(url, referer, tabId);
 	});
@@ -93,8 +93,17 @@ function showProperties(request) {
 	var size = request.getResponseHeader("Content-Length");
 	$("size").textContent = size;
 
-	var date = request.getResponseHeader("Last-Modified");
-	$("date").textContent = date;
+	var date = request.getResponseHeader("Last-Modified") || "";
+	var dt = date && new Date(date);
+	if(!dt || isNaN(dt))
+		$("date").title = date;
+	else try {
+		$("date").textContent = dt.toLocaleString(navigator.language);
+	}
+	catch(e) {
+		console.error(e);
+		$("date").textContent = dt.toLocaleString(); // Fallback for "invalid language tag" error
+	}
 
 	var type = request.getResponseHeader("Content-Type");
 	$("type").textContent = type;
