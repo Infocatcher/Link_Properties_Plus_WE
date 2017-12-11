@@ -114,6 +114,10 @@ function showProperties(request) {
 		return '<span class="buggy">' + safeHTML(line) + '</span>';
 	}).join("<br/>\n");
 	$("headers").appendChild(block);
+
+	for(var node of $("output").getElementsByClassName("value"))
+		if(!node.hasChildNodes())
+			node.innerHTML = '<em class="missing">Missing</em>';
 }
 
 function openOptions() {
