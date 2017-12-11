@@ -30,10 +30,10 @@ label {
 	grid-template-columns: max-content auto;
 	align-items: first baseline;
 }
-#output .value {
+.value {
 	word-break: break-all;
 }
-#headers .spacer {
+.header-spacer {
 	overflow: hidden;
 	height: 0.8em;
 	max-height: 0.8em;

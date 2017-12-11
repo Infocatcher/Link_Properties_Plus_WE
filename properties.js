@@ -64,7 +64,7 @@ function sendRequest(url, referer, tabId) {
 		}).join("<br/>\n");
 		$("headers").appendChild(block);
 		var spacer = document.createElement("div");
-		spacer.className = "spacer";
+		spacer.className = "header-spacer";
 		spacer.appendChild(document.createElement("br"));
 		$("headers").appendChild(spacer);
 	}
@@ -120,7 +120,7 @@ function showProperties(request) {
 	block.innerHTML = headers.split(/[\r\n]+/).map(function(line) {
 		if(/^([^:]+)\s*:\s*(.*)$/.test(line))
 			return headerHTML(RegExp.$1, RegExp.$2);
-		return '<span class="buggy">' + safeHTML(line) + '</span>';
+		return '<span class="header-buggy">' + safeHTML(line) + '</span>';
 	}).join("<br/>\n");
 	$("headers").appendChild(block);
 
@@ -144,9 +144,9 @@ function $(id) {
 	return document.getElementById(id);
 }
 function headerHTML(name, val) {
-	return '<strong class="name">' + safeHTML(name) + '</strong>'
-		+ '<span class="colon">: </span>'
-		+ '<span class="value">' + safeHTML(val) + '</span>';
+	return '<strong class="header-name">' + safeHTML(name) + '</strong>'
+		+ '<span class="header-colon">: </span>'
+		+ '<span class="header-value">' + safeHTML(val) + '</span>';
 }
 function safeHTML(s) {
 	return s
