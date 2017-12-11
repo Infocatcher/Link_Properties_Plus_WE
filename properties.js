@@ -117,7 +117,7 @@ function showProperties(request) {
 
 	for(var node of $("output").getElementsByClassName("value"))
 		if(!node.hasChildNodes())
-			node.innerHTML = '<em class="missing">Missing</em>';
+			node.innerHTML = '<em class="missing">' + safeHTML(browser.i18n.getMessage("missing")) + '</em>';
 }
 
 function openOptions() {
