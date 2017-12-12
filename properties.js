@@ -109,7 +109,12 @@ function showProperties(request) {
 	$("type").textContent = type;
 
 	var status = request.status;
-	$("status").textContent = status;
+	var statusText = request.statusText;
+	var statusStr = status + (statusText ? " " + statusText : "");
+	if(status >= 400 && status < 600)
+		$("status").innerHTML = '<em class="missing">' + safeHTML(statusStr) + '</em>';
+	else
+		$("status").textContent = statusStr;
 
 	var direct = request.responseURL;
 	$("direct").textContent = direct;
