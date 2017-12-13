@@ -37,6 +37,7 @@ function getProperties() {
 }
 function sendRequest(url, referer, tabId) {
 	var request = new XMLHttpRequest();
+	request._requestURL = url;
 	request.open("HEAD", url, true);
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
 	//referer && request.setRequestHeader("Referer", referer);
@@ -117,7 +118,10 @@ function showProperties(request) {
 		$("status").textContent = statusStr;
 
 	var direct = request.responseURL;
-	$("direct").textContent = direct;
+	if(direct == request._requestURL)
+		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
+	else
+		$("direct").textContent = direct;
 
 	var headers = request.getAllResponseHeaders() || "";
 	var block = document.createElement("div");
