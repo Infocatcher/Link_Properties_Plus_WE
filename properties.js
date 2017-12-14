@@ -1,3 +1,9 @@
+var prefs = {
+	debug: true,
+	precision: 2,
+	useBinaryPrefixes: true
+};
+
 var params = new URL(location).searchParams;
 $("url").value = params.get("url");
 $("referer").value = params.get("referer");
@@ -92,7 +98,25 @@ function sendRequest(url, referer, tabId) {
 }
 function showProperties(request) {
 	var size = request.getResponseHeader("Content-Length");
-	$("size").textContent = size;
+	var intSize = parseInt(size);
+	if(intSize >= 0) {
+		size = formatNum(intSize, 0);
+
+		var useBinaryPrefixes = prefs.useBinaryPrefixes;
+		var k = useBinaryPrefixes ? 1024 : 1000;
+		var type, g;
+		if     (intSize > k*k*k*k) type = "terabytes", g = k*k*k*k;
+		else if(intSize > k*k*k)   type = "gigabytes", g = k*k*k;
+		else if(intSize > k*k)     type = "megabytes", g = k*k;
+		else if(intSize > k/2)     type = "kilobytes", g = k;
+
+		if(type && useBinaryPrefixes)
+			type = type.replace(/^(..)../, "$1bi");
+
+		$("size").textContent = type
+			? browser.i18n.getMessage(type, [formatNum(intSize/g), size])
+			: browser.i18n.getMessage("bytes", size);
+	}
 
 	var date = request.getResponseHeader("Last-Modified") || "";
 	var dt = date && new Date(date);
@@ -163,4 +187,10 @@ function safeHTML(s) {
 		.replace(/</g, "&lt;")
 		.replace(/>/g, "&gt;")
 		.replace(/"/g, "&quot;");
+}
+function formatNum(n, precision = prefs.precision) {
+	return n.toLocaleString(undefined, {
+		minimumFractionDigits: precision,
+		maximumFractionDigits: precision
+	});
 }

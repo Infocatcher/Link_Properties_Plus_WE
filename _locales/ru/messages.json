@@ -8,6 +8,68 @@
 	"linkProperties": {
 		"message": "Свойства ссылки"
 	},
+	"bytes": {
+		"message": "$B$ байт",
+		"placeholders": {
+			"b": { "content": "$1" }
+		}
+	},
+	"kibibytes": {
+		"message": "$XB$ Кбайт ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"mebibytes": {
+		"message": "$XB$ Мбайт ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gibibytes": {
+		"message": "$XB$ Гбайт ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"tebibytes": {
+		"message": "$XB$ Тбайт ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"kilobytes": {
+		"message": "$XB$ КБ ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"megabytes": {
+		"message": "$XB$ МБ ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gigabytes": {
+		"message": "$XB$ ГБ ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"terabytes": {
+		"message": "$XB$ ТБ ($B$ байт)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
 	"missing": {
 		"message": "Отсутствует"
 	}

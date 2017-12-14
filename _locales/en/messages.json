@@ -8,6 +8,68 @@
 	"linkProperties": {
 		"message": "Link Properties"
 	},
+	"bytes": {
+		"message": "$B$ bytes",
+		"placeholders": {
+			"b": { "content": "$1" }
+		}
+	},
+	"kibibytes": {
+		"message": "$XB$ KiB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"mebibytes": {
+		"message": "$XB$ MiB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gibibytes": {
+		"message": "$XB$ GiB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"tebibytes": {
+		"message": "$XB$ TiB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"kilobytes": {
+		"message": "$XB$ KB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"megabytes": {
+		"message": "$XB$ MB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gigabytes": {
+		"message": "$XB$ GB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"terabytes": {
+		"message": "$XB$ TB ($B$ bytes)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
 	"missing": {
 		"message": "Missing"
 	}
