@@ -105,10 +105,10 @@ function showProperties(request) {
 		var useBinaryPrefixes = prefs.useBinaryPrefixes;
 		var k = useBinaryPrefixes ? 1024 : 1000;
 		var type, g;
-		if     (intSize > k*k*k*k) type = "terabytes", g = k*k*k*k;
-		else if(intSize > k*k*k)   type = "gigabytes", g = k*k*k;
-		else if(intSize > k*k)     type = "megabytes", g = k*k;
-		else if(intSize > k/2)     type = "kilobytes", g = k;
+		if     (intSize >= k*k*k*k) type = "terabytes", g = k*k*k*k;
+		else if(intSize >= k*k*k)   type = "gigabytes", g = k*k*k;
+		else if(intSize >= k*k)     type = "megabytes", g = k*k;
+		else if(intSize >= k/2)     type = "kilobytes", g = k;
 
 		if(type && useBinaryPrefixes)
 			type = type.replace(/^(..)../, "$1bi");
