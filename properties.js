@@ -1,5 +1,7 @@
 var prefs = {
 	debug: true,
+	localeDates: "",
+	localeNumbers: "",
 	precision: 2,
 	useBinaryPrefixes: true
 };
@@ -123,7 +125,7 @@ function showProperties(request) {
 	if(!dt || isNaN(dt))
 		$("date").title = date;
 	else try {
-		$("date").textContent = dt.toLocaleString(navigator.language);
+		$("date").textContent = dt.toLocaleString(prefs.localeDates || undefined);
 	}
 	catch(e) {
 		console.error(e);
@@ -189,7 +191,7 @@ function safeHTML(s) {
 		.replace(/"/g, "&quot;");
 }
 function formatNum(n, precision = prefs.precision) {
-	return n.toLocaleString(undefined, {
+	return n.toLocaleString(prefs.localeNumbers || undefined, {
 		minimumFractionDigits: precision,
 		maximumFractionDigits: precision
 	});
