@@ -7,7 +7,7 @@ html {
 	background-color: Menu;
 	color: MenuText;
 }
-html, button {
+html, button, input {
 	font: message-box;
 }
 body {
@@ -29,6 +29,7 @@ label {
 #output {
 	grid-template-columns: max-content auto;
 	align-items: first baseline;
+	margin-top: 0.4em;
 }
 .value {
 	word-break: break-all;
