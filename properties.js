@@ -12,6 +12,19 @@ $("referer").value = params.get("referer");
 if(params.get("autostart") == 1)
 	getProperties();
 
+browser.windows.getCurrent().then(function(win) {
+	if(win.type == "popup") addEventListener("beforeunload", function() { // Note: can't save on unload
+		browser.storage.local.set({
+			windowPosition: {
+				x: screenX,
+				y: screenY,
+				w: outerWidth,
+				h: outerHeight
+			}
+		});
+	}, { once: true });
+});
+
 var handlers = {
 	get: getProperties,
 	options: openOptions
@@ -19,16 +32,6 @@ var handlers = {
 for(var id in handlers)
 	$(id).addEventListener("click", handlers[id]);
 
-addEventListener("beforeunload", function() { // Note: can't save on unload
-	browser.storage.local.set({
-		windowPosition: {
-			x: screenX,
-			y: screenY,
-			w: outerWidth,
-			h: outerHeight
-		}
-	});
-}, { once: true });
 addEventListener("unload", function() {
 	for(var id in handlers)
 		$(id).removeEventListener("click", handlers[id]);

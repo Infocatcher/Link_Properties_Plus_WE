@@ -2,6 +2,7 @@ const LOG_PREFIX = "[Link Properties Plus WE] ";
 
 var prefs = {
 	debug: true,
+	openInTab: false,
 	windowPosition: {}
 };
 browser.storage.local.get().then(function(o) {
@@ -48,24 +49,34 @@ browser.browserAction.onClicked.addListener(function() {
 
 function openLinkProperties(url, ref, sourceTab, autoStart) {
 	var p = prefs.windowPosition || {};
-	browser.windows.create({
-		url: browser.extension.getURL("properties.html")
-			+ "?url=" + encodeURIComponent(url)
-			+ "&referer=" + encodeURIComponent(safeReferrer(ref))
-			+ "&autostart=" + +!!autoStart,
-		type: "popup",
-		// Note: left and top will be ignored
-		//left:   p.x || 0,
-		//top:    p.y || 0,
-		width:  p.w || 640,
-		height: p.h || 480
-	}).then(function(win) {
-		// Force move window (note: looks buggy)
-		//browser.windows.update(win.id, {
-		//	left:   p.x || 0,
-		//	top:    p.y || 0
-		//});
-	});
+	var url = browser.extension.getURL("properties.html")
+		+ "?url=" + encodeURIComponent(url)
+		+ "&referer=" + encodeURIComponent(safeReferrer(ref))
+		+ "&autostart=" + +!!autoStart;
+	if(prefs.openInTab) {
+		browser.tabs.create({
+			url: url,
+			openerTabId: sourceTab.id,
+			active: true
+		});
+	}
+	else {
+		browser.windows.create({
+			url: url,
+			type: "popup",
+			// Note: left and top will be ignored
+			//left:   p.x || 0,
+			//top:    p.y || 0,
+			width:  p.w || 640,
+			height: p.h || 480
+		}).then(function(win) {
+			// Force move window (note: looks buggy)
+			//browser.windows.update(win.id, {
+			//	left:   p.x || 0,
+			//	top:    p.y || 0
+			//});
+		});
+	}
 }
 function safeReferrer(ref) {
 	return /^(?:ftps?|https?):\//i.test(ref) ? ref : "";
