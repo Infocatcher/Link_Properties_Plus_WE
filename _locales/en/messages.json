@@ -3,7 +3,7 @@
 		"message": "Link Properties Plus WE"
 	},
 	"extensionDescription": {
-		"message": "Adds private tabs"
+		"message": "Provides extended link properties: size of linked file, last modified time, etc."
 	},
 	"linkProperties": {
 		"message": "Link Properties"

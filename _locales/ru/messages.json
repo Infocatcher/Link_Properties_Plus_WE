@@ -3,7 +3,7 @@
 		"message": "Link Properties Plus WE"
 	},
 	"extensionDescription": {
-		"message": "Добавляет приватные вкладки"
+		"message": "Предоставляет расширенные свойства для ссылок: размер файла по ссылке, дату последнего изменения и т.п."
 	},
 	"linkProperties": {
 		"message": "Свойства ссылки"
