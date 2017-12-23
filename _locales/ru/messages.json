@@ -8,6 +8,18 @@
 	"linkProperties": {
 		"message": "Свойства ссылки"
 	},
+	"link": {
+		"message": "Ссылка:"
+	},
+	"referer": {
+		"message": "Referer:"
+	},
+	"getProps": {
+		"message": "Получить свойства"
+	},
+	"options": {
+		"message": "Настройки"
+	},
 	"bytes": {
 		"message": "$B$ байт",
 		"placeholders": {

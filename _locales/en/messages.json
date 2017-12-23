@@ -8,6 +8,18 @@
 	"linkProperties": {
 		"message": "Link Properties"
 	},
+	"link": {
+		"message": "Link:"
+	},
+	"referer": {
+		"message": "Referer:"
+	},
+	"getProps": {
+		"message": "Get Properties"
+	},
+	"options": {
+		"message": "Options"
+	},
 	"bytes": {
 		"message": "$B$ bytes",
 		"placeholders": {
