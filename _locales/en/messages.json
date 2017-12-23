@@ -8,6 +8,7 @@
 	"linkProperties": {
 		"message": "Link Properties"
 	},
+
 	"link": {
 		"message": "Link:"
 	},
@@ -20,6 +21,26 @@
 	"options": {
 		"message": "Options"
 	},
+
+	"fileSize": {
+		"message": "File Size:"
+	},
+	"lastModified": {
+		"message": "Last Modified:"
+	},
+	"contentType": {
+		"message": "Content Type:"
+	},
+	"status": {
+		"message": "Status:"
+	},
+	"directLink": {
+		"message": "Direct Link:"
+	},
+	"httpHeaders": {
+		"message": "HTTP Headers:"
+	},
+
 	"bytes": {
 		"message": "$B$ bytes",
 		"placeholders": {

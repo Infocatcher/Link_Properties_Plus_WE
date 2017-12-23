@@ -8,6 +8,7 @@
 	"linkProperties": {
 		"message": "Свойства ссылки"
 	},
+
 	"link": {
 		"message": "Ссылка:"
 	},
@@ -20,6 +21,26 @@
 	"options": {
 		"message": "Настройки"
 	},
+
+	"fileSize": {
+		"message": "Размер файла:"
+	},
+	"lastModified": {
+		"message": "Последнее изменение:"
+	},
+	"contentType": {
+		"message": "Тип содержимого:"
+	},
+	"status": {
+		"message": "Статус:"
+	},
+	"directLink": {
+		"message": "Прямая ссылка:"
+	},
+	"httpHeaders:": {
+		"message": "Заголовки HTTP:"
+	},
+
 	"bytes": {
 		"message": "$B$ байт",
 		"placeholders": {
