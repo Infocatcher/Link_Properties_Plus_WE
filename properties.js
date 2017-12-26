@@ -1,16 +1,12 @@
-var prefs = {
-	debug: true,
-	localeDates: "",
-	localeNumbers: "",
-	precision: 2,
-	useBinaryPrefixes: true
-};
+readPrefs(function() {
+	_log("Prefs loaded");
 
-var params = new URL(location).searchParams;
-$("url").value = params.get("url");
-$("referer").value = params.get("referer");
-if(params.get("autostart") == 1)
-	getProperties();
+	var params = new URL(location).searchParams;
+	$("url").value = params.get("url");
+	$("referer").value = params.get("referer");
+	if(params.get("autostart") == 1)
+		getProperties();
+});
 
 browser.windows.getCurrent().then(function(win) {
 	if(win.type == "popup") addEventListener("beforeunload", function() { // Note: can't save on unload

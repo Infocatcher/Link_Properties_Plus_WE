@@ -1,23 +1,6 @@
-const LOG_PREFIX = "[Link Properties Plus WE] ";
-
-var prefs = {
-	debug: true,
-	openInTab: false,
-	windowPosition: {}
-};
-browser.storage.local.get().then(function(o) {
-	browser.storage.onChanged.addListener(function(changes, area) {
-		if(area == "local") for(var key in changes)
-			prefs[key] = changes[key].newValue;
-	});
-	Object.assign(prefs, o);
-
-	for(var key in o)
-		return; // Prefs already saved
-	setTimeout(function() { // Pseudo async
-		browser.storage.local.set(prefs);
-	}, 5000);
-}, _err);
+readPrefs(function() {
+	_log("Prefs loaded");
+});
 
 browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 	if(msg.action == "getTabId")
@@ -89,18 +72,4 @@ function notify(msg) {
 		"title": browser.i18n.getMessage("extensionName"),
 		"message": "" + msg // Force stringify to display errors objects
 	});
-}
-
-
-function ts() {
-	var d = new Date();
-	var ms = d.getMilliseconds();
-	return d.toTimeString().replace(/^.*\d+:(\d+:\d+).*$/, "$1") + ":" + "000".substr(("" + ms).length) + ms + " ";
-}
-function _log(s) {
-	if(prefs.debug)
-		console.log(LOG_PREFIX + ts() + s);
-}
-function _err(s) {
-	console.error(LOG_PREFIX + ts() + s);
 }
