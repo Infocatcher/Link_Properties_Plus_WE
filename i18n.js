@@ -14,7 +14,7 @@
 		text.nodeValue = localize(text.nodeValue);
 	}
 	var attrs = xPath('descendant::*/attribute::*[contains(., "__MSG_")]');
-	for(var i = 0, l = texts.snapshotLength; i < l; ++i) {
+	for(var i = 0, l = attrs.snapshotLength; i < l; ++i) {
 		var attr = attrs.snapshotItem(i);
 		attr.value = localize(attr.value);
 	}
