@@ -41,6 +41,19 @@
 		"message": "Заголовки HTTP:"
 	},
 
+	"openInTab": {
+		"message": "Открывать во вкладке"
+	},
+	"precision": {
+		"message": "Округлять размер файлов до:"
+	},
+	"useBinaryPrefixes": {
+		"message": "Использовать двоичные приставки (1 Кбайт = 1024 байт)"
+	},
+	"debug": {
+		"message": "Отладочный режим"
+	},
+
 	"bytes": {
 		"message": "$B$ байт",
 		"placeholders": {

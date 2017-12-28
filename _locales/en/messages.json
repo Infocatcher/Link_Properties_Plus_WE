@@ -41,6 +41,19 @@
 		"message": "HTTP Headers:"
 	},
 
+	"openInTab": {
+		"message": "Open in tab"
+	},
+	"precision": {
+		"message": "Round file size to:"
+	},
+	"useBinaryPrefixes": {
+		"message": "Use binary prefixes (1 KiB = 1024 bytes)"
+	},
+	"debug": {
+		"message": "Debug mode"
+	},
+
 	"bytes": {
 		"message": "$B$ bytes",
 		"placeholders": {
