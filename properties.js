@@ -43,6 +43,7 @@ function getProperties() {
 	});
 }
 function sendRequest(url, referer, tabId) {
+	$("get").disabled = true;
 	var request = new XMLHttpRequest();
 	request._requestURL = url;
 	request.open("HEAD", url, true);
@@ -92,6 +93,7 @@ function sendRequest(url, referer, tabId) {
 		if(this.readyState == this.HEADERS_RECEIVED) {
 			browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
 			browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
+			$("get").disabled = false;
 			showProperties(request);
 			request.abort();
 		}
