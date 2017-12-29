@@ -119,7 +119,9 @@ function showProperties(request) {
 			: browser.i18n.getMessage("bytes", size);
 	}
 
-	var date = request.getResponseHeader("Last-Modified") || "";
+	var date = request.getResponseHeader("Last-Modified")
+		|| request.getResponseHeader("X-Archive-Orig-Last-Modified")
+		|| "";
 	var dt = date && new Date(date);
 	if(!dt || isNaN(dt))
 		$("date").title = date;
