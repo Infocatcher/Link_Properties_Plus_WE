@@ -19,9 +19,16 @@ function saveOption(e) {
 	var node = e.target;
 	if(!(node.id in prefs))
 		return;
-	browser.storage.local.set({
-		[node.id]: getValue(node)
-	});
+	(save.prefs || (save.prefs = {}))[node.id] = getValue(node);
+	if(!save.timer)
+		save.timer = setTimeout(save, Date.now() - (save.last || 0) < 1000 ? 400 : 20);
+}
+function save() {
+	_log("Save: " + JSON.stringify(save.prefs));
+	browser.storage.local.set(save.prefs);
+	save.prefs = {};
+	save.timer = 0;
+	save.last = Date.now();
 }
 function getValue(node) {
 	return node.localName == "select" || node.type == "number"
