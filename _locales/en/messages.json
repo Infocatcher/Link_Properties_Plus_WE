@@ -44,6 +44,9 @@
 	"openInTab": {
 		"message": "Open in tab"
 	},
+	"decodeURIs": {
+		"message": "Decode URIs"
+	},
 	"precision": {
 		"message": "Round file size to:"
 	},

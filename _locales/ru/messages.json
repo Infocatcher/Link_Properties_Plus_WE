@@ -44,6 +44,9 @@
 	"openInTab": {
 		"message": "Открывать во вкладке"
 	},
+	"decodeURIs": {
+		"message": "Декодировать ссылки"
+	},
 	"precision": {
 		"message": "Округлять размер файлов до:"
 	},
