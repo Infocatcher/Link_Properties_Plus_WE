@@ -25,11 +25,12 @@ browser.windows.getCurrent().then(function(win) {
 });
 
 var handlers = {
-	get: getProperties,
-	options: openOptions
+	get:     { "click":   getProperties    },
+	options: { "click":   openOptions      }
 };
 for(var id in handlers)
-	$(id).addEventListener("click", handlers[id]);
+	for(var e in handlers[id])
+		$(id).addEventListener(e, handlers[id][e]);
 
 function onPopState(e) {
 	loadState();
@@ -38,7 +39,8 @@ addEventListener("popstate", onPopState);
 
 addEventListener("unload", function() {
 	for(var id in handlers)
-		$(id).removeEventListener("click", handlers[id]);
+		for(var e in handlers[id])
+			$(id).removeEventListener(e, handlers[id][e]);
 	removeEventListener("popstate", onPopState);
 }, { once: true });
 
