@@ -25,6 +25,8 @@ browser.windows.getCurrent().then(function(win) {
 });
 
 var handlers = {
+	url:     { "keydown": getPropertiesKey },
+	referer: { "keydown": getPropertiesKey },
 	get:     { "click":   getProperties    },
 	options: { "click":   openOptions      }
 };
@@ -44,6 +46,10 @@ addEventListener("unload", function() {
 	removeEventListener("popstate", onPopState);
 }, { once: true });
 
+function getPropertiesKey(e) {
+	if(e.keyCode == (e.DOM_VK_RETURN || 13))
+		getProperties();
+}
 function getProperties() {
 	var url = $("url").value;
 	var referer = $("referer").value;
