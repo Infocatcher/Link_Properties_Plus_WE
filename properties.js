@@ -1,13 +1,15 @@
 readPrefs(function() {
 	_log("Prefs loaded");
-
+	loadState(true);
+});
+function loadState(forceReplaceState) {
 	var params = new URL(location).searchParams;
 	var url = $("url").value = mayDecodeURL(params.get("url"));
-	$("referer").value = mayDecodeURL(params.get("referer"));
-	setTitle(url);
-	if(params.get("autostart") == 1)
+	var ref = $("referer").value = mayDecodeURL(params.get("referer"));
+	setState(url, ref, forceReplaceState);
+	if(url && params.get("autostart") == 1)
 		getProperties();
-});
+}
 
 browser.windows.getCurrent().then(function(win) {
 	if(win.type == "popup") addEventListener("beforeunload", function() { // Note: can't save on unload
@@ -29,15 +31,21 @@ var handlers = {
 for(var id in handlers)
 	$(id).addEventListener("click", handlers[id]);
 
+function onPopState(e) {
+	loadState();
+}
+addEventListener("popstate", onPopState);
+
 addEventListener("unload", function() {
 	for(var id in handlers)
 		$(id).removeEventListener("click", handlers[id]);
+	removeEventListener("popstate", onPopState);
 }, { once: true });
 
 function getProperties() {
 	var url = $("url").value;
 	var referer = $("referer").value;
-	setTitle(mayDecodeURL(url));
+	setState(mayDecodeURL(url), mayDecodeURL(referer));
 	for(var node of $("output").getElementsByClassName("value"))
 		node.textContent = node.title = "";
 	getTabId(function(tabId) {
@@ -183,8 +191,14 @@ function getTabId(callback) {
 function $(id) {
 	return document.getElementById(id);
 }
-function setTitle(url) {
-	document.title = browser.i18n.getMessage("linkPropertiesTitle", url);
+function setState(url, ref, forceReplaceState) {
+	var title = browser.i18n.getMessage("linkPropertiesTitle", url);
+	var pageUrl = getPropertiesURL(url, ref, true);
+	var meth = forceReplaceState || isSameURI(pageUrl, location.href)
+		? "replaceState"
+		: "pushState";
+	history[meth]("", "", pageUrl);
+	document.title = title;
 }
 function headerHTML(name, val) {
 	return '<strong class="header-name">' + safeHTML(name) + '</strong>'
@@ -260,4 +274,12 @@ function decodeURL(url) {
 		encodeURIComponent
 	);
 	return url;
+}
+function isSameURI(uri, uri2) {
+	try {
+		return decodeURIComponent(uri) == decodeURIComponent(uri2);
+	}
+	catch(e) {
+	}
+	return false;
 }

@@ -36,6 +36,19 @@ function _onPrefChanged(key, newVal) {
 function onPrefChanged(key, newVal) {
 }
 
+function getPropertiesURL(url, ref, autoStart) {
+	return browser.extension.getURL("properties.html")
+		+ "?url=" + encodeURIComponent(url)
+		+ (ref && isSafeReferrer(ref) ? "&referer=" + encodeURIComponent(ref) : "")
+		+ (autoStart ? "&autostart=1" : "");
+}
+function isSafeReferrer(ref) {
+	return /^(?:ftps?|https?):\//i.test(ref);
+}
+function safeReferrer(ref) {
+	return isSafeReferrer(ref) ? ref : "";
+}
+
 function ts() {
 	var d = new Date();
 	var ms = d.getMilliseconds();

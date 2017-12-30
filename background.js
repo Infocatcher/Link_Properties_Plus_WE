@@ -32,10 +32,7 @@ browser.browserAction.onClicked.addListener(function() {
 
 function openLinkProperties(url, ref, sourceTab, autoStart) {
 	var p = prefs.windowPosition || {};
-	var url = browser.extension.getURL("properties.html")
-		+ "?url=" + encodeURIComponent(url)
-		+ "&referer=" + encodeURIComponent(safeReferrer(ref))
-		+ "&autostart=" + +!!autoStart;
+	var url = getPropertiesURL(url, ref, autoStart);
 	if(prefs.openInTab) {
 		browser.tabs.create({
 			url: url,
@@ -60,9 +57,6 @@ function openLinkProperties(url, ref, sourceTab, autoStart) {
 			//});
 		});
 	}
-}
-function safeReferrer(ref) {
-	return /^(?:ftps?|https?):\//i.test(ref) ? ref : "";
 }
 
 function notify(msg) {
