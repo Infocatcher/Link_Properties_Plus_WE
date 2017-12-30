@@ -2,8 +2,8 @@ readPrefs(function() {
 	_log("Prefs loaded");
 
 	var params = new URL(location).searchParams;
-	$("url").value = params.get("url");
-	$("referer").value = params.get("referer");
+	$("url").value = mayDecodeURL(params.get("url"));
+	$("referer").value = mayDecodeURL(params.get("referer"));
 	if(params.get("autostart") == 1)
 		getProperties();
 });
@@ -146,7 +146,7 @@ function showProperties(request) {
 	else
 		$("status").textContent = statusStr;
 
-	var direct = request.responseURL;
+	var direct = mayDecodeURL(request.responseURL);
 	if(direct == request._requestURL)
 		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
 	else
@@ -198,4 +198,61 @@ function formatNum(n, precision = prefs.precision) {
 		minimumFractionDigits: precision,
 		maximumFractionDigits: precision
 	});
+}
+function mayDecodeURL(url) {
+	if(prefs.decodeURIs)
+		return decodeURL(url);
+	return url;
+}
+function decodeURL(url) {
+	// Based on losslessDecodeURI() function from
+	// chrome://browser/content/browser.js in Firefox 59.0a1 (2017-12-27)
+	var decodeASCIIOnly = !/^(?:https?|file|ftp):/i.test(url);
+
+	// Try to decode as UTF-8 if there's no encoding sequence that we would break.
+	if(!/%25(?:3B|2F|3F|3A|40|26|3D|2B|24|2C|23)/i.test(url)) {
+		if(decodeASCIIOnly) {
+			// This only decodes ascii characters (hex) 20-7e, except 25 (%).
+			// This avoids both cases stipulated below (%-related issues, and \r, \n
+			// and \t, which would be %0d, %0a and %09, respectively) as well as any
+			// non-US-ascii characters.
+			url = url.replace(/%(2[0-4]|2[6-9a-f]|[3-6][0-9a-f]|7[0-9a-e])/g, decodeURI);
+		}
+		else {
+			try {
+				url = decodeURI(url)
+					// 1. decodeURI decodes %25 to %, which creates unintended
+					//    encoding sequences. Re-encode it, unless it's part of
+					//    a sequence that survived decodeURI, i.e. one for:
+					//    ';', '/', '?', ':', '@', '&', '=', '+', '$', ',', '#'
+					//    (RFC 3987 section 3.2)
+					// 2. Re-encode select whitespace so that it doesn't get eaten
+					//    away by the location bar (bug 410726). Re-encode all
+					//    adjacent whitespace, to prevent spoofing attempts where
+					//    invisible characters would push part of the URL to
+					//    overflow the location bar (bug 1395508).
+					.replace(
+						/%(?!3B|2F|3F|3A|40|26|3D|2B|24|2C|23)|[\r\n\t]|\s(?=\s)|\s$/ig,
+						encodeURIComponent
+					);
+			}
+			catch(e) {
+			}
+		}
+	}
+
+	// Encode invisible characters (C0/C1 control characters, U+007F [DEL],
+	// U+00A0 [no-break space], line and paragraph separator,
+	// object replacement character) (bug 452979, bug 909264)
+	url = url.replace(/[\u0000-\u001f\u007f-\u00a0\u2028\u2029\ufffc]/g, encodeURIComponent);
+
+	// Encode default ignorable characters (bug 546013)
+	// except ZWNJ (U+200C) and ZWJ (U+200D) (bug 582186).
+	// This includes all bidirectional formatting characters.
+	// (RFC 3987 sections 3.2 and 4.1 paragraph 6)
+	url = url.replace(
+		/[\u00ad\u034f\u061c\u115f-\u1160\u17b4-\u17b5\u180b-\u180d\u200b\u200e-\u200f\u202a-\u202e\u2060-\u206f\u3164\ufe00-\ufe0f\ufeff\uffa0\ufff0-\ufff8]|\ud834[\udd73-\udd7a]|[\udb40-\udb43][\udc00-\udfff]/g,
+		encodeURIComponent
+	);
+	return url;
 }

@@ -6,6 +6,7 @@ var prefs = {
 	openInTab: false,
 	windowPosition: {},
 
+	decodeURIs: true,
 	localeDates: "",
 	localeNumbers: "",
 	precision: 2,
