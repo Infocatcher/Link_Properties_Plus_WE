@@ -8,6 +8,12 @@
 	"linkProperties": {
 		"message": "Link Properties"
 	},
+	"linkPropertiesTitle": {
+		"message": "Link Properties: $URI$",
+		"placeholders": {
+			"uri": { "content": "$1" }
+		}
+	},
 
 	"link": {
 		"message": "Link:"

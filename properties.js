@@ -2,8 +2,9 @@ readPrefs(function() {
 	_log("Prefs loaded");
 
 	var params = new URL(location).searchParams;
-	$("url").value = mayDecodeURL(params.get("url"));
+	var url = $("url").value = mayDecodeURL(params.get("url"));
 	$("referer").value = mayDecodeURL(params.get("referer"));
+	setTitle(url);
 	if(params.get("autostart") == 1)
 		getProperties();
 });
@@ -36,6 +37,7 @@ addEventListener("unload", function() {
 function getProperties() {
 	var url = $("url").value;
 	var referer = $("referer").value;
+	setTitle(mayDecodeURL(url));
 	for(var node of $("output").getElementsByClassName("value"))
 		node.textContent = node.title = "";
 	getTabId(function(tabId) {
@@ -180,6 +182,9 @@ function getTabId(callback) {
 
 function $(id) {
 	return document.getElementById(id);
+}
+function setTitle(url) {
+	document.title = browser.i18n.getMessage("linkPropertiesTitle", url);
 }
 function headerHTML(name, val) {
 	return '<strong class="header-name">' + safeHTML(name) + '</strong>'
