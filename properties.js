@@ -35,6 +35,7 @@ for(var id in handlers)
 		$(id).addEventListener(e, handlers[id][e]);
 
 function onPopState(e) {
+	_log("onPopState() -> loadState()");
 	loadState();
 }
 addEventListener("popstate", onPopState);
@@ -61,12 +62,14 @@ function setReferer(e) {
 		: url;
 }
 function getProperties() {
+	_log("getProperties()");
 	var url = $("url").value;
 	var referer = $("referer").value;
 	setState(mayDecodeURL(url), mayDecodeURL(referer));
 	for(var node of $("output").getElementsByClassName("value"))
 		node.textContent = node.title = "";
 	getTabId(function(tabId) {
+		_log("getProperties() -> sendRequest() for tab #" + tabId);
 		sendRequest(url, referer, tabId);
 	});
 }
@@ -121,6 +124,7 @@ function sendRequest(url, referer, tabId) {
 		if(this.readyState == this.HEADERS_RECEIVED) {
 			browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
 			browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
+			_log("sendRequest() -> headers received");
 			$("get").disabled = false;
 			showProperties(request);
 			request.abort();
