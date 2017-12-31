@@ -100,7 +100,7 @@ function sendRequest(url, referer, tabId) {
 	}
 	function onSendHeaders(e) {
 		var block = document.createElement("div");
-		block.className = "block";
+		block.className = "header-block";
 		block.innerHTML = e.requestHeaders.map(function(header) {
 			return headerHTML(header.name, header.value);
 		}).join("<br/>\n");
@@ -193,7 +193,7 @@ function showProperties(request) {
 
 	var headers = request.getAllResponseHeaders() || "";
 	var block = document.createElement("div");
-	block.className = "block";
+	block.className = "header-block";
 	block.innerHTML = headers.split(/[\r\n]+/).map(function(line) {
 		if(/^([^:]+)\s*:\s*(.*)$/.test(line))
 			return headerHTML(RegExp.$1, RegExp.$2);
