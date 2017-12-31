@@ -45,6 +45,7 @@ addEventListener("unload", function() {
 		for(var e in handlers[id])
 			$(id).removeEventListener(e, handlers[id][e]);
 	removeEventListener("popstate", onPopState);
+	sendRequest.cleanup && sendRequest.cleanup();
 }, { once: true });
 
 function getPropertiesKey(e) {
@@ -74,6 +75,7 @@ function getProperties() {
 	});
 }
 function sendRequest(url, referer, tabId) {
+	sendRequest.cleanup && sendRequest.cleanup();
 	$("get").disabled = true;
 	var request = new XMLHttpRequest();
 	request._requestURL = url;
@@ -118,16 +120,21 @@ function sendRequest(url, referer, tabId) {
 		filter,
 		["requestHeaders"]
 	);
+	var cleanup = sendRequest.cleanup = function() {
+		sendRequest.cleanup = null;
+		browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
+		browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
+		request.onreadystatechange = null;
+		request.abort();
+	};
 
 	request.send();
 	request.onreadystatechange = function() {
 		if(this.readyState == this.HEADERS_RECEIVED) {
-			browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
-			browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
 			_log("sendRequest() -> headers received");
 			$("get").disabled = false;
 			showProperties(request);
-			request.abort();
+			cleanup();
 		}
 	};
 }
