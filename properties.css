@@ -39,3 +39,7 @@ label {
 	height: 0.8em;
 	max-height: 0.8em;
 }
+.header-caption {
+	font-size: 1.1em;
+	margin: 0 0 0.1em;
+}

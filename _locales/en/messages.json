@@ -127,5 +127,11 @@
 	},
 	"missing": {
 		"message": "Missing"
+	},
+	"request": {
+		"message": "Request"
+	},
+	"response": {
+		"message": "Response"
 	}
 }

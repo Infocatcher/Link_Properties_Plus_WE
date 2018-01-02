@@ -99,6 +99,10 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
+		var caption = document.createElement("h1");
+		caption.className = "header-caption";
+		caption.textContent = browser.i18n.getMessage("request");
+		$("headers").appendChild(caption);
 		var block = document.createElement("div");
 		block.className = "header-block";
 		block.innerHTML = e.requestHeaders.map(function(header) {
@@ -191,6 +195,10 @@ function showProperties(request) {
 	else
 		$("direct").textContent = direct;
 
+	var caption = document.createElement("h1");
+	caption.className = "header-caption";
+	caption.textContent = browser.i18n.getMessage("response");
+	$("headers").appendChild(caption);
 	var headers = request.getAllResponseHeaders() || "";
 	var block = document.createElement("div");
 	block.className = "header-block";
