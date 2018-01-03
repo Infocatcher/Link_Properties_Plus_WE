@@ -101,7 +101,8 @@ function sendRequest(url, referer, tabId) {
 	function onSendHeaders(e) {
 		var caption = document.createElement("h1");
 		caption.className = "header-caption";
-		caption.textContent = browser.i18n.getMessage("request");
+		caption.textContent = "− " + browser.i18n.getMessage("request");
+		caption.addEventListener("click", toggleHeaderSection);
 		$("headers").appendChild(caption);
 		var block = document.createElement("div");
 		block.className = "header-block";
@@ -197,7 +198,8 @@ function showProperties(request) {
 
 	var caption = document.createElement("h1");
 	caption.className = "header-caption";
-	caption.textContent = browser.i18n.getMessage("response");
+	caption.textContent = "− " + browser.i18n.getMessage("response");
+	caption.addEventListener("click", toggleHeaderSection);
 	$("headers").appendChild(caption);
 	var headers = request.getAllResponseHeaders() || "";
 	var block = document.createElement("div");
@@ -241,6 +243,16 @@ function headerHTML(name, val) {
 	return '<strong class="header-name">' + safeHTML(name) + '</strong>'
 		+ '<span class="header-colon">: </span>'
 		+ '<span class="header-value">' + safeHTML(val) + '</span>';
+}
+function toggleHeaderSection(e) {
+	if(e.button != 0)
+		return;
+	var caption = e.currentTarget;
+	var tc = caption.textContent;
+	var show = tc.charAt(0) == "+";
+	var section = caption.nextSibling;
+	section.style.display = show ? "" : "none";
+	caption.textContent = (show ? "−" : "+") + " " + tc.substr(2);
 }
 function safeHTML(s) {
 	return s
