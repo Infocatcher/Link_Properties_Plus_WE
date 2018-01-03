@@ -245,9 +245,9 @@ function headerHTML(name, val) {
 		+ '<span class="header-value">' + safeHTML(val) + '</span>';
 }
 function toggleHeaderSection(e) {
-	if(e.button != 0)
-		return;
 	var caption = e.currentTarget;
+	if(e.button != 0 || ("" + caption.ownerDocument.getSelection()))
+		return;
 	var tc = caption.textContent;
 	var show = tc.charAt(0) == "+";
 	var section = caption.nextSibling;
