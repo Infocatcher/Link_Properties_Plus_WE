@@ -42,4 +42,9 @@ label {
 .header-caption {
 	font-size: 1.1em;
 	margin: 0 0 0.1em;
+	cursor: pointer;
+}
+.header-caption:hover,
+.header-caption:hover + .header-block {
+	opacity: 0.7;
 }
