@@ -253,6 +253,9 @@ function toggleHeaderSection(e) {
 	var section = caption.nextSibling;
 	section.style.display = show ? "" : "none";
 	caption.textContent = (show ? "−" : "+") + " " + tc.substr(2);
+	var spacer = section.nextSibling;
+	if(spacer && spacer.className == "header-spacer")
+		spacer.style.display = show ? "" : "none";
 }
 function safeHTML(s) {
 	return s
