@@ -251,11 +251,16 @@ function toggleHeaderSection(e) {
 	var tc = caption.textContent;
 	var show = tc.charAt(0) == "+";
 	var section = caption.nextSibling;
-	section.style.display = show ? "" : "none";
+	function toggle(node, show) {
+		node.style.display = show ? "" : "none";
+		if(show && !node.getAttribute("style"))
+			node.removeAttribute("style");
+	}
+	toggle(section, show);
 	caption.textContent = (show ? "−" : "+") + " " + tc.substr(2);
 	var spacer = section.nextSibling;
 	if(spacer && spacer.className == "header-spacer")
-		spacer.style.display = show ? "" : "none";
+		toggle(spacer, show);
 }
 function safeHTML(s) {
 	return s
