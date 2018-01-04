@@ -108,7 +108,7 @@ function sendRequest(url, referer, tabId) {
 		block.className = "header-block";
 		block.innerHTML = e.requestHeaders.map(function(header) {
 			return headerHTML(header.name, header.value);
-		}).join("<br/>\n");
+		}).join("\n");
 		$("headers").appendChild(block);
 		var spacer = document.createElement("div");
 		spacer.className = "header-spacer";
@@ -207,8 +207,8 @@ function showProperties(request) {
 	block.innerHTML = headers.split(/[\r\n]+/).map(function(line) {
 		if(/^([^:]+)\s*:\s*(.*)$/.test(line))
 			return headerHTML(RegExp.$1, RegExp.$2);
-		return '<span class="header-buggy">' + safeHTML(line) + '</span>';
-	}).join("<br/>\n");
+		return '<div class="header-entry"><span class="header-buggy">' + safeHTML(line) + '</span></div>';
+	}).join("\n");
 	$("headers").appendChild(block);
 
 	for(var node of $("output").getElementsByClassName("value"))
@@ -240,9 +240,11 @@ function setState(url, ref, forceReplaceState) {
 	document.title = title;
 }
 function headerHTML(name, val) {
-	return '<strong class="header-name">' + safeHTML(name) + '</strong>'
+	return '<div class="header-entry">'
+		+ '<strong class="header-name">' + safeHTML(name) + '</strong>'
 		+ '<span class="header-colon">: </span>'
-		+ '<span class="header-value">' + safeHTML(val) + '</span>';
+		+ '<span class="header-value">' + safeHTML(val) + '</span>'
+		+ '</div>';
 }
 function toggleHeaderSection(e) {
 	var caption = e.currentTarget;
