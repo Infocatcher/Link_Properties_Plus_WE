@@ -99,21 +99,23 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
+		var df = document.createDocumentFragment();
 		var caption = document.createElement("h1");
 		caption.className = "header-caption";
 		caption.textContent = "− " + browser.i18n.getMessage("request");
 		caption.addEventListener("click", toggleHeaderSection);
-		$("headers").appendChild(caption);
+		df.appendChild(caption);
 		var block = document.createElement("div");
 		block.className = "header-block";
 		block.innerHTML = e.requestHeaders.map(function(header) {
 			return headerHTML(header.name, header.value);
 		}).join("\n");
-		$("headers").appendChild(block);
+		df.appendChild(block);
 		var spacer = document.createElement("div");
 		spacer.className = "header-spacer";
 		spacer.appendChild(document.createElement("br"));
-		$("headers").appendChild(spacer);
+		df.appendChild(spacer);
+		$("headers").appendChild(df);
 	}
 	browser.webRequest.onBeforeSendHeaders.addListener(
 		onBeforeSendHeaders,
@@ -204,20 +206,24 @@ function showProperties(request, error) {
 	else
 		$("direct").textContent = direct;
 
-	var caption = document.createElement("h1");
-	caption.className = "header-caption";
-	caption.textContent = "− " + browser.i18n.getMessage("response");
-	caption.addEventListener("click", toggleHeaderSection);
-	$("headers").appendChild(caption);
 	var headers = request.getAllResponseHeaders() || "";
 	var block = document.createElement("div");
 	block.className = "header-block";
-	block.innerHTML = headers.split(/[\r\n]+/).map(function(line) {
+	block.innerHTML = headers && headers.split(/[\r\n]+/).map(function(line) {
 		if(/^([^:]+)\s*:\s*(.*)$/.test(line))
 			return headerHTML(RegExp.$1, RegExp.$2);
 		return '<div class="header-entry"><span class="header-buggy">' + safeHTML(line) + '</span></div>';
 	}).join("\n");
-	$("headers").appendChild(block);
+	if(block.hasChildNodes()) {
+		var caption = document.createElement("h1");
+		caption.className = "header-caption";
+		caption.textContent = "− " + browser.i18n.getMessage("response");
+		caption.addEventListener("click", toggleHeaderSection);
+		var df = document.createDocumentFragment();
+		df.appendChild(caption);
+		df.appendChild(block);
+		$("headers").appendChild(df);
+	}
 
 	for(var node of $("output").getElementsByClassName("value"))
 		if(!node.hasChildNodes())
