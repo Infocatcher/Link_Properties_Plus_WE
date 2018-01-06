@@ -58,12 +58,3 @@ function openLinkProperties(url, ref, sourceTab, autoStart) {
 		});
 	}
 }
-
-function notify(msg) {
-	browser.notifications.create({
-		"type": "basic",
-		"iconUrl": browser.extension.getURL("icon-32.png"),
-		"title": browser.i18n.getMessage("extensionName"),
-		"message": "" + msg // Force stringify to display errors objects
-	});
-}

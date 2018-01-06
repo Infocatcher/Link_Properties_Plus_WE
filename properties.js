@@ -133,7 +133,6 @@ function sendRequest(url, referer, tabId) {
 		request.abort();
 	};
 
-	request.send();
 	request.onreadystatechange = function() {
 		if(this.readyState == this.HEADERS_RECEIVED) {
 			_log("sendRequest() -> headers received");
@@ -142,6 +141,14 @@ function sendRequest(url, referer, tabId) {
 			cleanup();
 		}
 	};
+	request.onerror = function(e) {
+		_log("sendRequest(): error " + url);
+		$("get").disabled = false;
+		cleanup();
+		notify("Failed to load " + url);
+	};
+	request.send();
+	_log("sendRequest(): send() for " + url);
 }
 function showProperties(request) {
 	var size = request.getResponseHeader("Content-Length");

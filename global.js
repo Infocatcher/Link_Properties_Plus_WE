@@ -49,6 +49,15 @@ function safeReferrer(ref) {
 	return isSafeReferrer(ref) ? ref : "";
 }
 
+function notify(msg) {
+	browser.notifications.create({
+		"type": "basic",
+		"iconUrl": browser.extension.getURL("icon-32.png"),
+		"title": browser.i18n.getMessage("extensionName"),
+		"message": "" + msg // Force stringify to display errors objects
+	});
+}
+
 function ts() {
 	var d = new Date();
 	var ms = d.getMilliseconds();
