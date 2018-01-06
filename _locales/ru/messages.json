@@ -128,6 +128,9 @@
 	"missing": {
 		"message": "Отсутствует"
 	},
+	"error": {
+		"message": "Ошибка"
+	},
 	"request": {
 		"message": "Запрос"
 	},

@@ -144,13 +144,14 @@ function sendRequest(url, referer, tabId) {
 	request.onerror = function(e) {
 		_log("sendRequest(): error " + url);
 		$("get").disabled = false;
+		showProperties(request, e);
 		cleanup();
-		notify("Failed to load " + url);
+		//notify("Failed to load " + url);
 	};
 	request.send();
 	_log("sendRequest(): send() for " + url);
 }
-function showProperties(request) {
+function showProperties(request, error) {
 	var size = request.getResponseHeader("Content-Length");
 	var intSize = parseInt(size);
 	if(intSize >= 0) {
@@ -220,7 +221,7 @@ function showProperties(request) {
 
 	for(var node of $("output").getElementsByClassName("value"))
 		if(!node.hasChildNodes())
-			node.innerHTML = '<em class="missing">' + safeHTML(browser.i18n.getMessage("missing")) + '</em>';
+			node.innerHTML = '<em class="missing">' + safeHTML(browser.i18n.getMessage(error ? "error" : "missing")) + '</em>';
 }
 
 function openOptions() {
