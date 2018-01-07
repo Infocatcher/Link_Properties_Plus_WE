@@ -25,8 +25,7 @@ browser.windows.getCurrent().then(function(win) {
 });
 
 var handlers = {
-	url:     { "keydown": getPropertiesKey },
-	referer: { "keydown": getPropertiesKey, "dblclick": setReferer },
+	referer: { "dblclick": setReferer      },
 	get:     { "click":   getProperties    },
 	options: { "click":   openOptions      }
 };
@@ -39,19 +38,17 @@ function onPopState(e) {
 	loadState();
 }
 addEventListener("popstate", onPopState);
+addEventListener("keydown", onKeyDown, true);
 
 addEventListener("unload", function() {
 	for(var id in handlers)
 		for(var e in handlers[id])
 			$(id).removeEventListener(e, handlers[id][e]);
 	removeEventListener("popstate", onPopState);
+	removeEventListener("keydown", onKeyDown, true);
 	sendRequest.cleanup && sendRequest.cleanup();
 }, { once: true });
 
-function getPropertiesKey(e) {
-	if(e.keyCode == (e.DOM_VK_RETURN || 13))
-		getProperties();
-}
 function setReferer(e) {
 	var ref = $("referer");
 	if(ref.value || e.button != 0)
@@ -228,6 +225,14 @@ function showProperties(request, error) {
 	for(var node of $("output").getElementsByClassName("value"))
 		if(!node.hasChildNodes())
 			node.innerHTML = '<em class="missing">' + safeHTML(browser.i18n.getMessage(error ? "error" : "missing")) + '</em>';
+}
+
+function onKeyDown(e) {
+	var trg = e.target;
+	if(e.keyCode == (e.DOM_VK_RETURN || 13)) {
+		if(trg.id == "url" || trg.id == "referer")
+			getProperties();
+	}
 }
 
 function openOptions() {
