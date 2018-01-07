@@ -80,6 +80,7 @@ function sendRequest(url, referer, tabId) {
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
 	//referer && request.setRequestHeader("Referer", referer);
 
+	var redirects = [];
 	var filter = {
 		urls: ["<all_urls>"],
 		tabId: tabId
@@ -96,6 +97,9 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
+		redirects.push(e.url);
+		if(redirects.length > 1)
+			return; // Will show only first request
 		var df = document.createDocumentFragment();
 		var caption = document.createElement("h1");
 		caption.className = "header-caption";
@@ -125,6 +129,11 @@ function sendRequest(url, referer, tabId) {
 		["requestHeaders"]
 	);
 	var cleanup = sendRequest.cleanup = function() {
+		if(redirects.length > 1) {
+			$("direct").title = redirects.map(function(url, i) {
+				return (i > 0 ? "⇒ " : "") + mayDecodeURL(url);
+			}).join("\n");
+		}
 		sendRequest.cleanup = sendRequest.request = null;
 		browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
 		browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
