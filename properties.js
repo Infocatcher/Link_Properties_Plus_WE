@@ -74,7 +74,7 @@ function getProperties() {
 function sendRequest(url, referer, tabId) {
 	sendRequest.cleanup && sendRequest.cleanup();
 	$("get").disabled = true;
-	var request = new XMLHttpRequest();
+	var request = sendRequest.request = new XMLHttpRequest();
 	request._requestURL = url;
 	request.open("HEAD", url, true);
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
@@ -125,10 +125,10 @@ function sendRequest(url, referer, tabId) {
 		["requestHeaders"]
 	);
 	var cleanup = sendRequest.cleanup = function() {
-		sendRequest.cleanup = null;
+		sendRequest.cleanup = sendRequest.request = null;
 		browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
 		browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
-		request.onreadystatechange = null;
+		request.onreadystatechange = request.onabort = request.onerror = null;
 		request.abort();
 	};
 
@@ -140,12 +140,11 @@ function sendRequest(url, referer, tabId) {
 			cleanup();
 		}
 	};
-	request.onerror = function(e) {
-		_log("sendRequest(): error " + url);
+	request.onabort = request.onerror = function(e) {
+		_log("sendRequest(): " + e.type + " " + url);
 		$("get").disabled = false;
-		showProperties(request, e);
+		showProperties(request, e.type == "error" && e);
 		cleanup();
-		//notify("Failed to load " + url);
 	};
 	request.send();
 	_log("sendRequest(): send() for " + url);
@@ -232,6 +231,9 @@ function onKeyDown(e) {
 	if(e.keyCode == (e.DOM_VK_RETURN || 13)) {
 		if(trg.id == "url" || trg.id == "referer")
 			getProperties();
+	}
+	else if(e.keyCode == (e.DOM_VK_ESCAPE || 27)) {
+		sendRequest.request && sendRequest.request.abort();
 	}
 }
 
