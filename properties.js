@@ -102,8 +102,8 @@ function sendRequest(url, referer, tabId) {
 			return; // Will show only first request
 		var df = document.createDocumentFragment();
 		var caption = document.createElement("h1");
-		caption.className = "header-caption";
-		caption.textContent = "− " + browser.i18n.getMessage("request");
+		caption.className = "header-caption header-expanded";
+		caption.innerHTML = '<span class="header-twisty">− </span>' + safeHTML(browser.i18n.getMessage("request"));
 		caption.addEventListener("click", toggleHeaderSection);
 		df.appendChild(caption);
 		var block = document.createElement("div");
@@ -221,8 +221,8 @@ function showProperties(request, error) {
 	}).join("\n");
 	if(block.hasChildNodes()) {
 		var caption = document.createElement("h1");
-		caption.className = "header-caption";
-		caption.textContent = "− " + browser.i18n.getMessage("response");
+		caption.className = "header-caption header-expanded";
+		caption.innerHTML = '<span class="header-twisty">− </span>' + safeHTML(browser.i18n.getMessage("response"));
 		caption.addEventListener("click", toggleHeaderSection);
 		var df = document.createDocumentFragment();
 		df.appendChild(caption);
@@ -280,8 +280,8 @@ function toggleHeaderSection(e) {
 	var caption = e.currentTarget;
 	if(e.button != 0 || ("" + caption.ownerDocument.getSelection()))
 		return;
-	var tc = caption.textContent;
-	var show = tc.charAt(0) == "+";
+	var show = caption.classList.toggle("header-expanded");
+	caption.classList.toggle("header-collapsed", !show);
 	var section = caption.nextSibling;
 	function toggle(node, show) {
 		node.style.display = show ? "" : "none";
@@ -289,7 +289,7 @@ function toggleHeaderSection(e) {
 			node.removeAttribute("style");
 	}
 	toggle(section, show);
-	caption.textContent = (show ? "−" : "+") + " " + tc.substr(2);
+	caption.getElementsByClassName("header-twisty")[0].textContent = show ? "− " : "+ ";
 	var spacer = section.nextSibling;
 	if(spacer && spacer.className == "header-spacer")
 		toggle(spacer, show);
