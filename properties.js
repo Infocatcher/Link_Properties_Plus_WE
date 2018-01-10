@@ -103,7 +103,7 @@ function sendRequest(url, referer, tabId) {
 		var df = document.createDocumentFragment();
 		var caption = document.createElement("h1");
 		caption.className = "header-caption header-expanded";
-		caption.innerHTML = '<span class="header-twisty">− </span>' + safeHTML(browser.i18n.getMessage("request"));
+		caption.innerHTML = '<span class="header-twisty"></span>' + safeHTML(browser.i18n.getMessage("request"));
 		caption.addEventListener("click", toggleHeaderSection);
 		df.appendChild(caption);
 		var block = document.createElement("div");
@@ -222,7 +222,7 @@ function showProperties(request, error) {
 	if(block.hasChildNodes()) {
 		var caption = document.createElement("h1");
 		caption.className = "header-caption header-expanded";
-		caption.innerHTML = '<span class="header-twisty">− </span>' + safeHTML(browser.i18n.getMessage("response"));
+		caption.innerHTML = '<span class="header-twisty"></span>' + safeHTML(browser.i18n.getMessage("response"));
 		caption.addEventListener("click", toggleHeaderSection);
 		var df = document.createDocumentFragment();
 		df.appendChild(caption);
@@ -289,7 +289,6 @@ function toggleHeaderSection(e) {
 			node.removeAttribute("style");
 	}
 	toggle(section, show);
-	caption.getElementsByClassName("header-twisty")[0].textContent = show ? "− " : "+ ";
 	var spacer = section.nextSibling;
 	if(spacer && spacer.className == "header-spacer")
 		toggle(spacer, show);

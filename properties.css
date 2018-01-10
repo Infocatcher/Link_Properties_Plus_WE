@@ -48,3 +48,11 @@ label {
 .header-caption:hover + .header-block {
 	opacity: 0.7;
 }
+.header-expanded > .header-twisty::after {
+	content: "+";
+	margin-inline-end: 2px;
+}
+.header-collapsed > .header-twisty::after {
+	content: "−";
+	margin-inline-end: 2px;
+}
