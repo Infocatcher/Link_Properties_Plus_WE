@@ -43,6 +43,12 @@
 	"directLink": {
 		"message": "Прямая ссылка:"
 	},
+	"redirectsHeader": {
+		"message": "Перенаправления ($COUNT$):",
+		"placeholders": {
+			"count": { "content": "$1" }
+		}
+	},
 	"httpHeaders:": {
 		"message": "Заголовки HTTP:"
 	},

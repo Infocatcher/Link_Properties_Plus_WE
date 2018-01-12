@@ -131,7 +131,8 @@ function sendRequest(url, referer, tabId) {
 	var cleanup = sendRequest.cleanup = function() {
 		if(redirects.length > 1) {
 			$("direct").title = redirects.map(function(url, i) {
-				return (i > 0 ? "⇒ " : "") + mayDecodeURL(url);
+				return (i ? "⇒ " : browser.i18n.getMessage("redirectsHeader", redirects.length - 1) + "\n")
+					+ mayDecodeURL(url);
 			}).join("\n");
 		}
 		sendRequest.cleanup = sendRequest.request = null;

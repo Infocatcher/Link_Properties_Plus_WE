@@ -43,6 +43,12 @@
 	"directLink": {
 		"message": "Direct Link:"
 	},
+	"redirectsHeader": {
+		"message": "Redirects ($COUNT$):",
+		"placeholders": {
+			"count": { "content": "$1" }
+		}
+	},
 	"httpHeaders": {
 		"message": "HTTP Headers:"
 	},
