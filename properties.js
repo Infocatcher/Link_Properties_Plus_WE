@@ -4,8 +4,8 @@ readPrefs(function() {
 });
 function loadState(forceReplaceState) {
 	var params = new URL(location).searchParams;
-	var url = $("url").value = mayDecodeURL(params.get("url"));
-	var ref = $("referer").value = mayDecodeURL(params.get("referer"));
+	var url = $("url").value = mayDecodeURL(params.get("url") || "");
+	var ref = $("referer").value = mayDecodeURL(params.get("referer") || "");
 	setState(url, ref, forceReplaceState);
 	if(url && params.get("autostart") == 1)
 		getProperties();
