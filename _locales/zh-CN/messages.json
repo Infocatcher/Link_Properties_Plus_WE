@@ -1,0 +1,146 @@
+{
+	"extensionName": {
+		"message": "Link Properties Plus WE"
+	},
+	"extensionDescription": {
+		"message": "本扩展提供增强的链接属性，包括所链接文件的大小、最后修改时间等。"
+	},
+	"linkProperties": {
+		"message": "链接属性"
+	},
+	"linkPropertiesTitle": {
+		"message": "链接属性: $URI$",
+		"placeholders": {
+			"uri": { "content": "$1" }
+		}
+	},
+
+	"link": {
+		"message": "链接:"
+	},
+	"referer": {
+		"message": "引用页:"
+	},
+	"getProps": {
+		"message": "获取属性"
+	},
+	"options": {
+		"message": "选项"
+	},
+
+	"fileSize": {
+		"message": "文件大小:"
+	},
+	"lastModified": {
+		"message": "最后修改:"
+	},
+	"contentType": {
+		"message": "文件类型:"
+	},
+	"status": {
+		"message": "响应状态:"
+	},
+	"directLink": {
+		"message": "实际链接:"
+	},
+	"redirectsHeader": {
+		"message": "重定向 ($COUNT$):",
+		"placeholders": {
+			"count": { "content": "$1" }
+		}
+	},
+	"httpHeaders": {
+		"message": "HTTP响应头:"
+	},
+
+	"openInTab": {
+		"message": "Open in tab"
+	},
+	"decodeURIs": {
+		"message": "解码URI"
+	},
+	"precision": {
+		"message": "文件大小小数位数:"
+	},
+	"useBinaryPrefixes": {
+		"message": "使用二进制规范 (1 KiB=1024 字节)"
+	},
+	"debug": {
+		"message": "Debug mode"
+	},
+
+	"bytes": {
+		"message": "$B$ bytes",
+		"placeholders": {
+			"b": { "content": "$1" }
+		}
+	},
+	"kibibytes": {
+		"message": "$XB$ KiB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"mebibytes": {
+		"message": "$XB$ MiB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gibibytes": {
+		"message": "$XB$ GiB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"tebibytes": {
+		"message": "$XB$ TiB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"kilobytes": {
+		"message": "$XB$ KB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"megabytes": {
+		"message": "$XB$ MB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gigabytes": {
+		"message": "$XB$ GB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"terabytes": {
+		"message": "$XB$ TB ($B$ 字节)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"missing": {
+		"message": "未提供"
+	},
+	"error": {
+		"message": "Error"
+	},
+	"request": {
+		"message": "请求信息"
+	},
+	"response": {
+		"message": "响应信息"
+	}
+}
