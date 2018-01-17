@@ -262,7 +262,9 @@ function $(id) {
 	return document.getElementById(id);
 }
 function setState(url, ref, forceReplaceState) {
-	var title = browser.i18n.getMessage("linkPropertiesTitle", url);
+	var title = url
+		? browser.i18n.getMessage("linkPropertiesTitle", url)
+		: browser.i18n.getMessage("linkProperties");
 	var pageUrl = getPropertiesURL(url, ref, true);
 	var meth = forceReplaceState || isSameURI(pageUrl, location.href)
 		? "replaceState"
