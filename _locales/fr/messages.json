@@ -1,0 +1,146 @@
+{
+	"extensionName": {
+		"message": "Link Properties Plus WE"
+	},
+	"extensionDescription": {
+		"message": "Complète les propriétés d'un lien : taille du fichier lié, date de modification, etc."
+	},
+	"linkProperties": {
+		"message": "Propriétés du lien"
+	},
+	"linkPropertiesTitle": {
+		"message": "Propriétés du lien: $URI$",
+		"placeholders": {
+			"uri": { "content": "$1" }
+		}
+	},
+
+	"link": {
+		"message": "Lien :"
+	},
+	"referer": {
+		"message": "Page de provenance :"
+	},
+	"getProps": {
+		"message": "Obtenir les propriétés"
+	},
+	"options": {
+		"message": "Options"
+	},
+
+	"fileSize": {
+		"message": "Taille du fichier :"
+	},
+	"lastModified": {
+		"message": "Dernière modification :"
+	},
+	"contentType": {
+		"message": "Type de contenu :"
+	},
+	"status": {
+		"message": "Statut :"
+	},
+	"directLink": {
+		"message": "Lien direct :"
+	},
+	"redirectsHeader": {
+		"message": "Redirections ($COUNT$) :",
+		"placeholders": {
+			"count": { "content": "$1" }
+		}
+	},
+	"httpHeaders": {
+		"message": "En-têtes HTTP :"
+	},
+
+	"openInTab": {
+		"message": "Open in tab"
+	},
+	"decodeURIs": {
+		"message": "Décoder les URIs"
+	},
+	"precision": {
+		"message": "Arrondir la taille du fichier à :"
+	},
+	"useBinaryPrefixes": {
+		"message": "Utiliser les préfixes binaires (1 Kio = 1024 octets)"
+	},
+	"debug": {
+		"message": "Debug mode"
+	},
+
+	"bytes": {
+		"message": "$B$ octets",
+		"placeholders": {
+			"b": { "content": "$1" }
+		}
+	},
+	"kibibytes": {
+		"message": "$XB$ Kio ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"mebibytes": {
+		"message": "$XB$ Mio ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gibibytes": {
+		"message": "$XB$ Gio ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"tebibytes": {
+		"message": "$XB$ Tio ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"kilobytes": {
+		"message": "$XB$ Ko ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"megabytes": {
+		"message": "$XB$ Mo ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"gigabytes": {
+		"message": "$XB$ Go ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"terabytes": {
+		"message": "$XB$ To ($B$ octets)",
+		"placeholders": {
+			"xb": { "content": "$1" },
+			"b": { "content": "$2" }
+		}
+	},
+	"missing": {
+		"message": "Absent"
+	},
+	"error": {
+		"message": "Error"
+	},
+	"request": {
+		"message": "Requête"
+	},
+	"response": {
+		"message": "Réponse"
+	}
+}
