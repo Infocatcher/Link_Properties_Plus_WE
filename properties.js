@@ -1,6 +1,7 @@
 readPrefs(function() {
 	_log("Prefs loaded");
 	loadState(true);
+	showItems();
 });
 function loadState(forceReplaceState) {
 	var params = new URL(location).searchParams;
@@ -9,6 +10,12 @@ function loadState(forceReplaceState) {
 	setState(url, ref, forceReplaceState);
 	if(url && params.get("autostart") == 1)
 		getProperties();
+}
+function showItems() {
+	var cl = $("output").classList;
+	cl.toggle("hide-status", !prefs.showResponseStatus);
+	cl.toggle("hide-direct", !prefs.showDirectURI);
+	cl.toggle("hide-headers", !prefs.showHttpHeaders);
 }
 
 browser.windows.getCurrent().then(function(win) {

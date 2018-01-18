@@ -6,6 +6,10 @@ var prefs = {
 	openInTab: false,
 	windowPosition: {},
 
+	showResponseStatus: true,
+	showDirectURI: true,
+	showHttpHeaders: true,
+
 	decodeURIs: true,
 	localeDates: "",
 	localeNumbers: "",

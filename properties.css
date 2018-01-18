@@ -31,6 +31,11 @@ label {
 	align-items: first baseline;
 	margin-top: 0.4em;
 }
+#output.hide-status > #statusLabel, #output.hide-status > #status,
+#output.hide-direct > #directLabel, #output.hide-direct > #direct,
+#output.hide-headers > #headersLabel, #output.hide-headers > #headers {
+	display: none;
+}
 .value {
 	word-break: break-all;
 }
