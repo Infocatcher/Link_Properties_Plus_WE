@@ -56,6 +56,15 @@
 	"openInTab": {
 		"message": "Открывать во вкладке"
 	},
+	"showResponseStatus": {
+		"message": "Статус ответа"
+	},
+	"showDirectURI": {
+		"message": "Прямая ссылка"
+	},
+	"showHttpHeaders": {
+		"message": "Заголовки HTTP"
+	},
 	"decodeURIs": {
 		"message": "Декодировать ссылки"
 	},

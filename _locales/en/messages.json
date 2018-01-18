@@ -56,6 +56,15 @@
 	"openInTab": {
 		"message": "Open in tab"
 	},
+	"showResponseStatus": {
+		"message": "Response status"
+	},
+	"showDirectURI": {
+		"message": "Direct link"
+	},
+	"showHttpHeaders": {
+		"message": "HTTP headers"
+	},
 	"decodeURIs": {
 		"message": "Decode URIs"
 	},

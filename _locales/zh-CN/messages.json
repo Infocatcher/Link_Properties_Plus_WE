@@ -56,6 +56,15 @@
 	"openInTab": {
 		"message": "Open in tab"
 	},
+	"showResponseStatus": {
+		"message": "响应状态"
+	},
+	"showDirectURI": {
+		"message": "实际链接"
+	},
+	"showHttpHeaders": {
+		"message": "HTTP响应头"
+	},
 	"decodeURIs": {
 		"message": "解码URI"
 	},
