@@ -17,6 +17,10 @@ function showItems() {
 	cl.toggle("hide-direct", !prefs.showDirectURI);
 	cl.toggle("hide-headers", !prefs.showHttpHeaders);
 }
+function onPrefChanged(key, newVal) {
+	if(key.startsWith("show"))
+		showItems();
+}
 
 browser.windows.getCurrent().then(function(win) {
 	if(win.type == "popup") addEventListener("beforeunload", function() { // Note: can't save on unload
