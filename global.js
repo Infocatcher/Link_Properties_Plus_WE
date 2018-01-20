@@ -41,10 +41,12 @@ function onPrefChanged(key, newVal) {
 }
 
 function getPropertiesURL(url, ref, autoStart) {
-	return browser.extension.getURL("properties.html")
-		+ "?url=" + encodeURIComponent(url)
-		+ (ref && isSafeReferrer(ref) ? "&referer=" + encodeURIComponent(ref) : "")
-		+ (autoStart ? "&autostart=1" : "");
+	var propsUrl = new URL(browser.extension.getURL("properties.html"));
+	var params = propsUrl.searchParams;
+	url                        && params.append("url",       url);
+	ref && isSafeReferrer(ref) && params.append("referer",   ref);
+	autoStart && url           && params.append("autostart", 1);
+	return "" + propsUrl;
 }
 function isSafeReferrer(ref) {
 	return /^(?:ftps?|https?):\//i.test(ref);
