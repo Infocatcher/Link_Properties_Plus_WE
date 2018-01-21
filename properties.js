@@ -124,6 +124,7 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
+		request._directURL = e.url;
 		if(hasHeaders)
 			return;
 		hasHeaders = true;
@@ -243,7 +244,8 @@ function showProperties(request, error) {
 	else
 		$("status").textContent = statusStr;
 
-	var direct = mayDecodeURL(request.responseURL);
+	// Note: request.responseURL doesn't contain #hash part
+	var direct = mayDecodeURL(request._directURL || request.responseURL);
 	if(direct == request._requestURL)
 		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
 	else
