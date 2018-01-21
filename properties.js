@@ -72,8 +72,8 @@ function setReferer(e) {
 }
 function getProperties() {
 	_log("getProperties()");
-	var url = $("url").value;
-	var referer = $("referer").value;
+	var url = inputURL("url");
+	var referer = inputURL("referer");
 	setState(mayDecodeURL(url), mayDecodeURL(referer));
 	for(var node of $("output").getElementsByClassName("value"))
 		node.textContent = node.title = "";
@@ -81,6 +81,21 @@ function getProperties() {
 		_log("getProperties() -> sendRequest() for tab #" + tabId);
 		sendRequest(url, referer, tabId);
 	});
+}
+function inputURL(id) {
+	var inp = $(id);
+	var url = inp.value;
+	if(url && !/^[^:./]+:/.test(url) && !isValidURL(url))
+		return inp.value = "http://" + url;
+	return url;
+}
+function isValidURL(url) {
+	try {
+		return !!new URL(url);
+	}
+	catch(e) {
+	}
+	return false;
 }
 function sendRequest(url, referer, tabId) {
 	sendRequest.cleanup && sendRequest.cleanup();
