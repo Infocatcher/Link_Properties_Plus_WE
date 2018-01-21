@@ -106,6 +106,7 @@ function sendRequest(url, referer, tabId) {
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
 	//referer && request.setRequestHeader("Referer", referer);
 
+	var hasHeaders;
 	var redirects = [];
 	var filter = {
 		urls: ["<all_urls>"],
@@ -123,9 +124,9 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
-		redirects.push(e.url);
-		if(redirects.length > 1)
-			return; // Will show only first request
+		if(hasHeaders)
+			return;
+		hasHeaders = true;
 		var df = document.createDocumentFragment();
 		var caption = document.createElement("h1");
 		caption.className = "header-caption header-expanded";
@@ -144,6 +145,11 @@ function sendRequest(url, referer, tabId) {
 		df.appendChild(spacer);
 		$("headers").appendChild(df);
 	}
+	function onBeforeRedirect(e) {
+		if(!redirects.length)
+			redirects.push(e.url);
+		redirects.push(e.redirectUrl);
+	}
 	browser.webRequest.onBeforeSendHeaders.addListener(
 		onBeforeSendHeaders,
 		filter,
@@ -153,6 +159,10 @@ function sendRequest(url, referer, tabId) {
 		onSendHeaders,
 		filter,
 		["requestHeaders"]
+	);
+	browser.webRequest.onBeforeRedirect.addListener(
+		onBeforeRedirect,
+		filter
 	);
 	var cleanup = sendRequest.cleanup = function() {
 		if(redirects.length > 1) {
@@ -164,6 +174,7 @@ function sendRequest(url, referer, tabId) {
 		sendRequest.cleanup = sendRequest.request = null;
 		browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
 		browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
+		browser.webRequest.onBeforeRedirect.removeListener(onBeforeRedirect);
 		request.onreadystatechange = request.onabort = request.onerror = null;
 		request.abort();
 	};
