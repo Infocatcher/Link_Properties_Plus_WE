@@ -101,7 +101,12 @@ function sendRequest(url, referer, tabId) {
 	sendRequest.cleanup && sendRequest.cleanup();
 	$("get").disabled = true;
 	var request = sendRequest.request = new XMLHttpRequest();
-	request._requestURL = url;
+	try { // Perform fixups like http://example.com -> http://example.com/
+		request._requestURL = "" + new URL(url);
+	}
+	catch(e) {
+		request._requestURL = url;
+	}
 	request.open("HEAD", url, true);
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
 	//referer && request.setRequestHeader("Referer", referer);
