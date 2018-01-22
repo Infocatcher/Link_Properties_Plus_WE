@@ -74,6 +74,12 @@ function getProperties() {
 	_log("getProperties()");
 	var url = inputURL("url");
 	var referer = inputURL("referer");
+	if(referer) try { // Force encode into %XX format (Unicode characters not supported as referer)
+		referer = "" + new URL(referer);
+	}
+	catch(e) {
+		console.error(e);
+	}
 	setState(mayDecodeURL(url), mayDecodeURL(referer));
 	for(var node of $("output").getElementsByClassName("value"))
 		node.textContent = node.title = "";
