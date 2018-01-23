@@ -316,7 +316,7 @@ function setState(url, ref, forceReplaceState) {
 		? browser.i18n.getMessage("linkPropertiesTitle", url)
 		: browser.i18n.getMessage("linkProperties");
 	var pageUrl = getPropertiesURL(url, ref, true);
-	var meth = forceReplaceState || isSameURI(pageUrl, location.href)
+	var meth = forceReplaceState || isSameURL(pageUrl, location.href)
 		? "replaceState"
 		: "pushState";
 	history[meth]("", "", pageUrl);
@@ -416,11 +416,11 @@ function decodeURL(url) {
 	);
 	return url;
 }
-function isSameURI(uri, uri2) {
+function isSameURL(url, url2) {
 	try {
-		return decodeURIComponent(uri) == decodeURIComponent(uri2);
+		return ("" + new URL(url)) == ("" + new URL(url2));
 	}
 	catch(e) {
 	}
-	return false;
+	return url == url2;
 }
