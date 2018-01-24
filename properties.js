@@ -91,8 +91,10 @@ function getProperties() {
 function inputURL(id) {
 	var inp = $(id);
 	var url = inp.value;
-	if(url && !/^[^:./]+:/.test(url) && !isValidURL(url))
+	if(url && !/^[^:./]+:/.test(url) && !isValidURL(url)) {
+		notifyUI("fixedURL#" + id);
 		return inp.value = "http://" + url;
+	}
 	return url;
 }
 function isValidURL(url) {
@@ -352,6 +354,14 @@ function safeHTML(s) {
 		.replace(/</g, "&lt;")
 		.replace(/>/g, "&gt;")
 		.replace(/"/g, "&quot;");
+}
+function notifyUI(reason) {
+	var root = document.documentElement;
+	clearTimeout(notifyUI.timer || 0);
+	root.setAttribute("lpp_notify", reason);
+	notifyUI.timer = setTimeout(function() {
+		root.removeAttribute("lpp_notify");
+	}, 700);
 }
 function formatNum(n, precision = prefs.precision) {
 	return n.toLocaleString(prefs.localeNumbers || undefined, {

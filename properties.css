@@ -61,3 +61,8 @@ label {
 	content: "−";
 	margin-inline-end: 2px;
 }
+
+:root[lpp_notify="fixedURL#url"] #url,
+:root[lpp_notify="fixedURL#referer"] #referer {
+	color: #090;
+}
