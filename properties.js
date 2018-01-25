@@ -3,6 +3,15 @@ readPrefs(function() {
 	loadState(true);
 	showItems();
 });
+setTimeout(function() {
+	var bg = window.getComputedStyle(root, null).backgroundColor;
+	if(/^rgb\((\d+), *(\d+), *(\d+)\)$/.test(bg)) {
+		var r = +RegExp.$1, g = +RegExp.$2, b = +RegExp.$3;
+		var brightness = Math.max(r/255, g/255, b/255); // HSV, 0..1
+		if(brightness < 0.4)
+			root.classList.add("darkBG");
+	}
+}, 0);
 function loadState(forceReplaceState) {
 	var params = new URL(location).searchParams;
 	var url = $("url").value = mayDecodeURL(params.get("url") || "");
