@@ -29,6 +29,16 @@ function showItems() {
 function onPrefChanged(key, newVal) {
 	if(key.startsWith("show"))
 		showItems();
+	else if(
+		[
+			"decodeURIs",
+			"localeDates",
+			"localeNumbers",
+			"precision",
+			"useBinaryPrefixes"
+		].indexOf(key) != -1
+	)
+		showProperties();
 }
 
 browser.windows.getCurrent().then(function(win) {
@@ -67,6 +77,7 @@ addEventListener("unload", function() {
 	removeEventListener("popstate", onPopState);
 	removeEventListener("keydown", onKeyDown, true);
 	sendRequest.cleanup && sendRequest.cleanup();
+	showProperties.lastArgs = null;
 }, { once: true });
 
 function setReferer(e) {
@@ -220,6 +231,11 @@ function sendRequest(url, referer, tabId) {
 	_log("sendRequest(): send() for " + url);
 }
 function showProperties(request, error) {
+	if(request)
+		showProperties.lastArgs = [request, error];
+	else
+		[request, error] = showProperties.lastArgs || [];
+
 	var size = request.getResponseHeader("Content-Length");
 	var intSize = parseInt(size);
 	if(intSize >= 0) {
@@ -258,8 +274,8 @@ function showProperties(request, error) {
 	var type = request.getResponseHeader("Content-Type");
 	$("type").textContent = type;
 
-	var status = request.status;
-	var statusText = request.statusText;
+	var status = request._status = request._status || request.status;
+	var statusText = request._statusText = request._statusText || request.statusText;
 	var statusStr = status + (statusText ? " " + statusText : "");
 	if(status >= 400 && status < 600)
 		$("status").innerHTML = '<em class="missing">' + safeHTML(statusStr) + '</em>';
