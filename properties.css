@@ -23,7 +23,7 @@ label {
 	grid-gap: 0.3em;
 }
 #input {
-	grid-template-columns: max-content auto max-content;
+	grid-template-columns: max-content auto min-content max-content;
 	align-items: safe center;
 }
 #output {
@@ -31,6 +31,18 @@ label {
 	align-items: first baseline;
 	margin-top: 0.4em;
 }
+
+#url:invalid, #referer {
+	grid-column-end: span 2; /* Two-sell item */
+	box-shadow: none; /* Hide "invalid" highlighting */
+}
+#url:invalid + #link-url {
+	display: none;
+}
+.icon {
+	vertical-align: middle;
+}
+
 #headers:not(:empty) {
 	border: 1px solid ThreeDLightShadow;
 	outline: 1px solid ThreeDShadow;
