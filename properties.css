@@ -27,7 +27,7 @@ label {
 	align-items: safe center;
 }
 #output {
-	grid-template-columns: max-content auto;
+	grid-template-columns: max-content auto min-content;
 	align-items: first baseline;
 	margin-top: 0.4em;
 }
@@ -41,6 +41,16 @@ label {
 }
 .icon {
 	vertical-align: middle;
+}
+
+#output > .value {
+	grid-column-end: span 2; /* Two-sell item */
+}
+#output > #direct:empty + #link-direct {
+	display: none;
+}
+#output > #direct:not(:empty) {
+	grid-column-end: auto; /* One-cell item */
 }
 
 #headers:not(:empty) {
