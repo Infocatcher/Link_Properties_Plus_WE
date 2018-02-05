@@ -46,10 +46,10 @@ label {
 #output > .value {
 	grid-column-end: span 2; /* Two-sell item */
 }
-#output > #direct:empty + #link-direct {
+#output > #direct:not(.changed) + #link-direct {
 	display: none;
 }
-#output > #direct:not(:empty) {
+#output > #direct.changed {
 	grid-column-end: auto; /* One-cell item */
 }
 

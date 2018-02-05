@@ -284,10 +284,12 @@ function showProperties(request, error) {
 
 	// Note: request.responseURL doesn't contain #hash part
 	var direct = mayDecodeURL(request._directURL || request.responseURL);
-	if(isSameURL(direct, request._requestURL))
+	var isSame = isSameURL(direct, request._requestURL);
+	if(isSame)
 		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
 	else
 		$("direct").textContent = direct;
+	$("direct").classList.toggle("changed", direct && !isSame);
 
 	var headers = request.getAllResponseHeaders() || "";
 	var block = document.createElement("div");
