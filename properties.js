@@ -17,6 +17,7 @@ function loadState(forceReplaceState) {
 	var url = $("url").value = mayDecodeURL(params.get("url") || "");
 	var ref = $("referer").value = mayDecodeURL(params.get("referer") || "");
 	setState(url, ref, forceReplaceState);
+	setURL();
 	if(url && params.get("autostart") == 1)
 		getProperties();
 }
@@ -55,6 +56,7 @@ browser.windows.getCurrent().then(function(win) {
 });
 
 var handlers = {
+	url:     { "change":   setURL          },
 	referer: { "dblclick": setReferer      },
 	get:     { "click":   getProperties    },
 	options: { "click":   openOptions      }
@@ -80,6 +82,9 @@ addEventListener("unload", function() {
 	showProperties.lastArgs = null;
 }, { once: true });
 
+function setURL() {
+	$("link-url").href = $("url").value;
+}
 function setReferer(e) {
 	var ref = $("referer");
 	if(ref.value || e.button != 0)
@@ -283,12 +288,14 @@ function showProperties(request, error) {
 		$("status").textContent = statusStr;
 
 	// Note: request.responseURL doesn't contain #hash part
-	var direct = mayDecodeURL(request._directURL || request.responseURL);
+	var directRaw = request._directURL || request.responseURL;
+	var direct = mayDecodeURL(directRaw);
 	var isSame = isSameURL(direct, request._requestURL);
 	if(isSame)
 		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
 	else
 		$("direct").textContent = direct;
+	$("link-direct").href = directRaw;
 	$("direct").classList.toggle("changed", direct && !isSame);
 
 	var headers = request.getAllResponseHeaders() || "";
