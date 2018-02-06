@@ -56,7 +56,7 @@ browser.windows.getCurrent().then(function(win) {
 });
 
 var handlers = {
-	url:     { "change":   setURL          },
+	url:     { "change":   setURL, "input": setURLDelayed },
 	referer: { "dblclick": setReferer      },
 	get:     { "click":   getProperties    },
 	options: { "click":   openOptions      }
@@ -84,6 +84,14 @@ addEventListener("unload", function() {
 
 function setURL() {
 	$("link-url").href = $("url").value;
+}
+function setURLDelayed() {
+	if(setURLDelayed.timer || 0)
+		return;
+	setURLDelayed.timer = setTimeout(function() {
+		setURLDelayed.timer = 0;
+		setURL();
+	}, 200);
 }
 function setReferer(e) {
 	var ref = $("referer");
