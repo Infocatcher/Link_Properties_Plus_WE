@@ -56,10 +56,13 @@ browser.windows.getCurrent().then(function(win) {
 });
 
 var handlers = {
-	url:     { "change":   setURL, "input": setURLDelayed },
-	referer: { "dblclick": setReferer      },
-	get:     { "click":   getProperties    },
-	options: { "click":   openOptions      }
+	url: {
+		change: setURL,
+		input:  setURLDelayed
+	},
+	referer: { dblclick: setReferer    },
+	get:     { click:    getProperties },
+	options: { click:    openOptions   }
 };
 for(var id in handlers)
 	for(var e in handlers[id])
