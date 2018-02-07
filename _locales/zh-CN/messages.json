@@ -21,6 +21,9 @@
 	"referer": {
 		"message": "引用页:"
 	},
+	"goToURI": {
+		"message": "打开此链接"
+	},
 	"getProps": {
 		"message": "获取属性"
 	},

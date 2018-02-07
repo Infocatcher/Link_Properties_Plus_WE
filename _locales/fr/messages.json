@@ -21,6 +21,9 @@
 	"referer": {
 		"message": "Page de provenance :"
 	},
+	"goToURI": {
+		"message": "Suivre le lien"
+	},
 	"getProps": {
 		"message": "Obtenir les propriétés"
 	},

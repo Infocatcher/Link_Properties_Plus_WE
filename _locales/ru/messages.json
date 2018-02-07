@@ -21,6 +21,9 @@
 	"referer": {
 		"message": "Referer:"
 	},
+	"goToURI": {
+		"message": "Перейти по ссылке"
+	},
 	"getProps": {
 		"message": "Получить свойства"
 	},
