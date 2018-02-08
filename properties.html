@@ -11,9 +11,14 @@
 	<div id="input" class="grid">
 		<label for="url">__MSG_link__</label>
 		<input id="url" type="text" required="required" />
-		<a id="link-url" href="" target="_blank" title="__MSG_goToURI__">
-			<img class="icon" src="icon-link.png" width="16" height="16" alt="link" />
-		</a>
+		<span id="utils-url" class="utils">
+			<a id="link-url" href="" target="_blank" title="__MSG_goToURI__">
+				<img class="icon" src="icon-link.png" width="16" height="16" alt="link" />
+			</a>
+			<a id="dl-url" href="" target="_blank">
+				<img class="icon" src="icon-download.png" width="16" height="16" alt="download" />
+			</a>
+		</span>
 		<button id="get">__MSG_getProps__</button>
 
 		<label for="referer">__MSG_referer__</label>
@@ -36,9 +41,14 @@
 
 		<label id="directLabel">__MSG_directLink__</label>
 		<span id="direct" class="value"></span>
-		<a id="link-direct" href="" target="_blank" title="__MSG_goToURI__">
-			<img class="icon" src="icon-link.png" width="16" height="16" alt="link" />
-		</a>
+		<span id="utils-direct" class="utils">
+			<a id="link-direct" href="" target="_blank" title="__MSG_goToURI__">
+				<img class="icon" src="icon-link.png" width="16" height="16" alt="link" />
+			</a>
+			<a id="dl-direct" href="" target="_blank">
+				<img class="icon" src="icon-download.png" width="16" height="16" alt="download" />
+			</a>
+		</span>
 
 		<label id="headersLabel">__MSG_httpHeaders__</label>
 		<div id="headers" class="value"></div>

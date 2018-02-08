@@ -36,8 +36,14 @@ label {
 	grid-column-end: span 2; /* Two-sell item */
 	box-shadow: none; /* Hide "invalid" highlighting */
 }
-#url:invalid + #link-url {
+#url:invalid + #utils-url {
 	display: none;
+}
+.utils {
+	white-space: nowrap;
+}
+.utils > a {
+	text-decoration: none;	
 }
 .icon {
 	vertical-align: middle;
@@ -46,7 +52,7 @@ label {
 #output > .value {
 	grid-column-end: span 2; /* Two-sell item */
 }
-#output > #direct:not(.changed) + #link-direct {
+#output > #direct:not(.changed) + #utils-direct {
 	display: none;
 }
 #output > #direct.changed {
