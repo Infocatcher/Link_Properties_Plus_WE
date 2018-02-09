@@ -42,11 +42,15 @@ label {
 .utils {
 	white-space: nowrap;
 }
-.utils > a {
-	text-decoration: none;	
+.link {
+	text-decoration: none;
 }
 .icon {
 	vertical-align: middle;
+	transition: filter 100ms ease-in-out;
+}
+.link:hover > .icon {
+	filter: brightness(0.9);
 }
 
 #output > .value {
