@@ -62,7 +62,9 @@ var handlers = {
 	},
 	referer: { dblclick: setReferer    },
 	get:     { click:    getProperties },
-	options: { click:    openOptions   }
+	options: { click:    openOptions   },
+	"dl-url":    { click: downloadURL },
+	"dl-direct": { click: downloadURL }
 };
 for(var id in handlers)
 	for(var e in handlers[id])
@@ -86,7 +88,7 @@ addEventListener("unload", function() {
 }, { once: true });
 
 function setURL() {
-	$("link-url").href = $("url").value;
+	$("link-url").href = $("dl-url").href = $("url").value;
 }
 function setURLDelayed() {
 	if(setURLDelayed.timer || 0)
@@ -306,7 +308,7 @@ function showProperties(request, error) {
 		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
 	else
 		$("direct").textContent = direct;
-	$("link-direct").href = directRaw;
+	$("link-direct").href = $("dl-direct").href = directRaw;
 	$("direct").classList.toggle("changed", direct && !isSame);
 
 	var headers = request.getAllResponseHeaders() || "";
@@ -353,6 +355,12 @@ function getTabId(callback) {
 	}).then(function onResponse(tabId) {
 		callback(tabId);
 	}, console.error);
+}
+
+function downloadURL(e) {
+	var a = e.currentTarget;
+	e.preventDefault();
+	browser.downloads.download({ url: a.href });
 }
 
 function $(id) {
