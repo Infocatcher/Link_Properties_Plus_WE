@@ -4,6 +4,7 @@ readPrefs(function() {
 	showItems();
 });
 setTimeout(function() {
+	var root = document.documentElement;
 	var bg = window.getComputedStyle(root, null).backgroundColor;
 	if(/^rgb\((\d+), *(\d+), *(\d+)\)$/.test(bg)) {
 		var r = +RegExp.$1, g = +RegExp.$2, b = +RegExp.$3;
