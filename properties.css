@@ -47,6 +47,7 @@ label {
 }
 .icon {
 	vertical-align: middle;
+	padding-bottom: 1px;
 	transition: filter 100ms ease-in-out;
 }
 .link:hover > .icon {
