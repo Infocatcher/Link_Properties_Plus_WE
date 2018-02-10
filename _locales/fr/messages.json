@@ -24,6 +24,9 @@
 	"goToURI": {
 		"message": "Suivre le lien"
 	},
+	"downloadURI": {
+		"message": "Enregistrer le lien…"
+	},
 	"getProps": {
 		"message": "Obtenir les propriétés"
 	},

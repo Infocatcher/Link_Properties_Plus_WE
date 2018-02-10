@@ -24,6 +24,9 @@
 	"goToURI": {
 		"message": "打开此链接"
 	},
+	"downloadURI": {
+		"message": "目标另存为…"
+	},
 	"getProps": {
 		"message": "获取属性"
 	},

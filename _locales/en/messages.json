@@ -24,6 +24,9 @@
 	"goToURI": {
 		"message": "Go to link"
 	},
+	"downloadURI": {
+		"message": "Save link as…"
+	},
 	"getProps": {
 		"message": "Get Properties"
 	},

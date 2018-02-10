@@ -24,6 +24,9 @@
 	"goToURI": {
 		"message": "Перейти по ссылке"
 	},
+	"downloadURI": {
+		"message": "Сохранить как…"
+	},
 	"getProps": {
 		"message": "Получить свойства"
 	},
