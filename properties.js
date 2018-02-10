@@ -44,7 +44,19 @@ function onPrefChanged(key, newVal) {
 }
 
 browser.windows.getCurrent().then(function(win) {
-	if(win.type == "popup") addEventListener("beforeunload", function() { // Note: can't save on unload
+	if(win.type != "popup")
+		return;
+
+	// Workaround for empty window with disabled e10s mode
+	browser.windows.update(win.id, {
+		height: win.height + 1
+	}).then(function() {
+		browser.windows.update(win.id, {
+			height: win.height
+		});
+	});
+
+	addEventListener("beforeunload", function() { // Note: can't save on unload
 		browser.storage.local.set({
 			windowPosition: {
 				x: screenX,
