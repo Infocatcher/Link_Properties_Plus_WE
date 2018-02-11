@@ -146,6 +146,12 @@
 			"b": { "content": "$2" }
 		}
 	},
+	"resumeDownloadShouldBe": {
+		"message": "La reprise de téléchargement devrait être prise en charge"
+	},
+	"resumeDownloadShouldNot": {
+		"message": "La reprise de téléchargement ne devrait pas être prise en charge"
+	},
 	"missing": {
 		"message": "Absent"
 	},

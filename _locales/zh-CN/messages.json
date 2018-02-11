@@ -146,6 +146,12 @@
 			"b": { "content": "$2" }
 		}
 	},
+	"resumeDownloadShouldBe": {
+		"message": "支持断点续传"
+	},
+	"resumeDownloadShouldNot": {
+		"message": "不支持断点续传"
+	},
 	"missing": {
 		"message": "未提供"
 	},

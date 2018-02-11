@@ -316,6 +316,9 @@ function showProperties(request, error) {
 	var canResume = request.getResponseHeader("Accept-Ranges") == "bytes" && intSize > 0;
 	document.documentElement.classList.toggle("canResume", canResume);
 	$("status").classList.toggle("canResume", canResume);
+	$("status").title = browser.i18n.getMessage(
+		canResume ? "resumeDownloadShouldBe" : "resumeDownloadShouldNot"
+	);
 
 	// Note: request.responseURL doesn't contain #hash part
 	var directRaw = request._directURL || request.responseURL;

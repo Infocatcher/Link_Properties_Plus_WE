@@ -146,6 +146,12 @@
 			"b": { "content": "$2" }
 		}
 	},
+	"resumeDownloadShouldBe": {
+		"message": "Докачка должна поддерживаться"
+	},
+	"resumeDownloadShouldNot": {
+		"message": "Докачка не должна поддерживаться"
+	},
 	"missing": {
 		"message": "Отсутствует"
 	},

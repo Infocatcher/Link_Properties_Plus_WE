@@ -146,6 +146,12 @@
 			"b": { "content": "$2" }
 		}
 	},
+	"resumeDownloadShouldBe": {
+		"message": "Download resuming should be supported"
+	},
+	"resumeDownloadShouldNot": {
+		"message": "Download resuming shouldn't be supported"
+	},
 	"missing": {
 		"message": "Missing"
 	},
