@@ -313,6 +313,10 @@ function showProperties(request, error) {
 	else
 		$("status").textContent = statusStr;
 
+	var canResume = request.getResponseHeader("Accept-Ranges") == "bytes" && intSize > 0;
+	document.documentElement.classList.toggle("canResume", canResume);
+	$("status").classList.toggle("canResume", canResume);
+
 	// Note: request.responseURL doesn't contain #hash part
 	var directRaw = request._directURL || request.responseURL;
 	var direct = mayDecodeURL(directRaw);

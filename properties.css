@@ -64,6 +64,13 @@ label {
 	grid-column-end: auto; /* One-cell item */
 }
 
+#status.canResume {
+	color: #090;
+}
+:root.darkBG #status.canResume {
+	color: #0b0;
+}
+
 #headers:not(:empty) {
 	border: 1px solid ThreeDLightShadow;
 	outline: 1px solid ThreeDShadow;
