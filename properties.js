@@ -57,14 +57,23 @@ browser.windows.getCurrent().then(function(win) {
 	});
 
 	addEventListener("beforeunload", function() { // Note: can't save on unload
-		browser.storage.local.set({
+		var storageData = {
 			windowPosition: {
 				x: screenX,
 				y: screenY,
 				w: outerWidth,
 				h: outerHeight
 			}
-		});
+		};
+
+		// Workaround to save state with disabled e10s mode
+		var broadcastChannel = new BroadcastChannel("LPP:windowPosition");
+		broadcastChannel.postMessage(storageData);
+		broadcastChannel.close();
+
+		browser.storage.local.set(storageData).then(function() {
+			_log("Save window position using direct browser.storage.local.set() call");
+		}, _err);
 	}, { once: true });
 });
 

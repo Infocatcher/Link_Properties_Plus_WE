@@ -30,6 +30,15 @@ browser.browserAction.onClicked.addListener(function() {
 //	_log("commands.onCommand: " + command);
 //});
 
+var broadcastChannel = new BroadcastChannel("LPP:windowPosition");
+broadcastChannel.onmessage = function(msg) {
+	_log("Save window position using BroadcastChannel");
+    browser.storage.local.set(msg.data);
+};
+addEventListener("unload", function() {
+    broadcastChannel.close();
+}, { once: true });
+
 function openLinkProperties(url, ref, sourceTab, autoStart) {
 	var p = prefs.windowPosition || {};
 	var url = getPropertiesURL(url, ref, autoStart);
