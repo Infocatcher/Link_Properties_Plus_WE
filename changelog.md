@@ -15,6 +15,7 @@
 `*` Apply options around output formatting on the fly.<br>
 `+` Added links to open and download initial and direct links.<br>
 `*` Tweak styles.<br>
+`x` Fixes for disabled multi-process mode.<br>
 
 ##### 0.1a1 (2018-01-15)
 `*` First WebExtensions draft.<br>
