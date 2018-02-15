@@ -42,28 +42,40 @@ addEventListener("unload", function() {
 function openLinkProperties(url, ref, sourceTab, autoStart) {
 	var p = prefs.windowPosition || {};
 	var url = getPropertiesURL(url, ref, autoStart);
-	if(prefs.openInTab) {
-		browser.tabs.create({
-			url: url,
-			openerTabId: sourceTab.id,
-			active: true
-		});
-	}
-	else {
-		browser.windows.create({
-			url: url,
-			type: "popup",
-			// Note: left and top will be ignored
-			//left:   p.x || 0,
-			//top:    p.y || 0,
-			width:  p.w || 640,
-			height: p.h || 480
-		}).then(function(win) {
-			// Force move window (note: looks buggy)
-			//browser.windows.update(win.id, {
-			//	left:   p.x || 0,
-			//	top:    p.y || 0
-			//});
-		});
-	}
+	browser.tabs.query({
+		url: "" + new URL(url) // Should be normalized: ?url=https%3A%2F%2F -> ?url=https%3A//
+	}).then(function(tabs) {
+		if(tabs && tabs.length) {
+			var tab = tabs[0];
+			_log("Found already opened tab -> activate");
+			browser.tabs.update(tab.id, { active: true });
+			browser.windows.update(tab.windowId, { focused: true, drawAttention: true });
+			return;
+		}
+
+		if(prefs.openInTab) {
+			browser.tabs.create({
+				url: url,
+				openerTabId: sourceTab.id,
+				active: true
+			});
+		}
+		else {
+			browser.windows.create({
+				url: url,
+				type: "popup",
+				// Note: left and top will be ignored
+				//left:   p.x || 0,
+				//top:    p.y || 0,
+				width:  p.w || 640,
+				height: p.h || 480
+			}).then(function(win) {
+				// Force move window (note: looks buggy)
+				//browser.windows.update(win.id, {
+				//	left:   p.x || 0,
+				//	top:    p.y || 0
+				//});
+			});
+		}
+	}, _err);
 }
