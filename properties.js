@@ -389,7 +389,13 @@ function getTabId(callback) {
 function downloadURL(e) {
 	var a = e.currentTarget;
 	e.preventDefault();
-	browser.downloads.download({ url: a.href });
+	try {
+		browser.downloads.download({ url: a.href });
+	}
+	catch(e) {
+		console.error(e);
+		notify(e);
+	}
 }
 
 function $(id) {
