@@ -16,7 +16,7 @@ browser.contextMenus.create({
 browser.contextMenus.onClicked.addListener(function(info, tab) {
 	var miId = info.menuItemId;
 	_log("contextMenus.onClicked: " + miId);
-	openLinkProperties(info.linkUrl, info.frameUrl, tab, true);
+	openLinkProperties(info.linkUrl, info.frameUrl || info.pageUrl, tab, true);
 });
 
 
