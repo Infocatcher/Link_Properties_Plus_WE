@@ -133,13 +133,8 @@ function setReferer(e) {
 function getProperties() {
 	_log("getProperties()");
 	var url = inputURL("url");
-	var referer = inputURL("referer");
-	if(referer) try { // Force encode into %XX format (Unicode characters not supported as referer)
-		referer = "" + new URL(referer);
-	}
-	catch(e) {
-		console.error(e);
-	}
+	// Force encode into %XX format (Unicode characters not supported as referer)
+	var referer = normalizeURL(inputURL("referer"));
 	setState(mayDecodeURL(url), mayDecodeURL(referer));
 	for(var node of $("output").getElementsByClassName("value"))
 		node.textContent = node.title = "";
@@ -169,12 +164,7 @@ function sendRequest(url, referer, tabId) {
 	sendRequest.cleanup && sendRequest.cleanup();
 	$("get").disabled = true;
 	var request = sendRequest.request = new XMLHttpRequest();
-	try { // Perform fixups like http://example.com -> http://example.com/
-		request._requestURL = "" + new URL(url);
-	}
-	catch(e) {
-		request._requestURL = url;
-	}
+	request._requestURL = normalizeURL(url); // Perform fixups like http://example.com -> http://example.com/
 	request.open("HEAD", url, true);
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
 	//referer && request.setRequestHeader("Referer", referer);
@@ -515,10 +505,5 @@ function decodeURL(url) {
 	return url;
 }
 function isSameURL(url, url2) {
-	try {
-		return ("" + new URL(url)) == ("" + new URL(url2));
-	}
-	catch(e) {
-	}
-	return url == url2;
+	return normalizeURL(url) == normalizeURL(url2);
 }

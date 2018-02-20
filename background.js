@@ -55,7 +55,7 @@ function openLinkProperties(url, ref, sourceTab, autoStart) {
 }
 function findTabByURL(url, callback) {
 	browser.tabs.query({
-		url: "" + new URL(url) // Should be normalized: ?url=https%3A%2F%2F -> ?url=https%3A//
+		url: normalizeURL(url) // Should be normalized: ?url=https%3A%2F%2F -> ?url=https%3A//
 	}).then(function(tabs) {
 		callback(tabs && tabs.length && tabs[0]);
 	}, _err);

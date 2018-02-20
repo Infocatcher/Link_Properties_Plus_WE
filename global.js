@@ -40,6 +40,14 @@ function _onPrefChanged(key, newVal) {
 function onPrefChanged(key, newVal) {
 }
 
+function normalizeURL(url) {
+	if(url) try {
+		return "" + new URL(url);
+	}
+	catch(e) {
+	}
+	return url;
+}
 function getPropertiesURL(url, ref, autoStart) {
 	var propsUrl = new URL(browser.extension.getURL("properties.html"));
 	var params = propsUrl.searchParams;
