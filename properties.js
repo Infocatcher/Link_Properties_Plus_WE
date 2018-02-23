@@ -297,7 +297,7 @@ function showProperties(request, error) {
 		$("date").textContent = dt.toLocaleString(prefs.localeDates || undefined);
 	}
 	catch(e) {
-		console.error(e);
+		_err(e);
 		$("date").textContent = dt.toLocaleString(); // Fallback for "invalid language tag" error
 	}
 
@@ -373,7 +373,7 @@ function getTabId(callback) {
 		action: "getTabId"
 	}).then(function onResponse(tabId) {
 		callback(tabId);
-	}, console.error);
+	}, _err);
 }
 
 function downloadURL(e) {
