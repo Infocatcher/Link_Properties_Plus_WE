@@ -50,7 +50,7 @@ function openLinkProperties(url, ref, sourceTab, autoStart) {
 		else if(prefs.openInTab)
 			openLinkPropertiesInTab(url, sourceTab.id);
 		else
-			openLinkPropertiesInWindow(url);
+			openLinkPropertiesInWindow(url, sourceTab);
 	});
 }
 function findTabByURL(url, callback) {
@@ -67,11 +67,12 @@ function openLinkPropertiesInTab(url, openerTabId) {
 		active: true
 	});
 }
-function openLinkPropertiesInWindow(url) {
+function openLinkPropertiesInWindow(url, sourceTab) {
 	var p = prefs.windowPosition || {};
 	browser.windows.create({
 		url: url,
 		type: "popup",
+		incognito: sourceTab.incognito,
 		// Note: left and top will be ignored
 		//left:   p.x || 0,
 		//top:    p.y || 0,
