@@ -48,7 +48,7 @@ function openLinkProperties(url, ref, sourceTab, autoStart) {
 			browser.windows.update(tab.windowId, { focused: true, drawAttention: true });
 		}
 		else if(prefs.openInTab)
-			openLinkPropertiesInTab(url, sourceTab.id);
+			openLinkPropertiesInTab(url, sourceTab);
 		else
 			openLinkPropertiesInWindow(url, sourceTab);
 	});
@@ -60,10 +60,10 @@ function findTabByURL(url, callback) {
 		callback(tabs && tabs.length && tabs[0]);
 	}, _err);
 }
-function openLinkPropertiesInTab(url, openerTabId) {
+function openLinkPropertiesInTab(url, sourceTab) {
 	browser.tabs.create({
 		url: url,
-		openerTabId: openerTabId,
+		openerTabId: sourceTab.id,
 		active: true
 	});
 }
