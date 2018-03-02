@@ -41,7 +41,7 @@ addEventListener("unload", function() {
 
 function openLinkProperties(url, ref, sourceTab, autoStart) {
 	var url = getPropertiesURL(url, ref, autoStart);
-	findTabByURL(url, function(tab) {
+	findTabByURL(url, sourceTab.incognito, function(tab) {
 		if(tab) {
 			_log("Found already opened tab -> activate");
 			browser.tabs.update(tab.id, { active: true });
@@ -53,11 +53,14 @@ function openLinkProperties(url, ref, sourceTab, autoStart) {
 			openLinkPropertiesInWindow(url, sourceTab);
 	});
 }
-function findTabByURL(url, callback) {
+function findTabByURL(url, incognito, callback) {
 	browser.tabs.query({
 		url: normalizeURL(url) // Should be normalized: ?url=https%3A%2F%2F -> ?url=https%3A//
 	}).then(function(tabs) {
-		callback(tabs && tabs.length && tabs[0]);
+		for(var tab of tabs)
+			if(incognito === undefined || tab.incognito == incognito)
+				return callback(tab);
+		return callback(null);
 	}, _err);
 }
 function openLinkPropertiesInTab(url, sourceTab) {
