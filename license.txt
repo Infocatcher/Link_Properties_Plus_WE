@@ -1,0 +1,10 @@
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+Link Properties Plus WE extension for Firefox
+(c) Infocatcher 2017-2018 <https://github.com/Infocatcher>
+
+Based on code from Link Properties Plus extension for Firefox, SeaMonkey and Thunderbird
+(c) Infocatcher 2009-2018 <https://github.com/Infocatcher>
+(c) Torisugari 2004-2005 (author of the original Extended Link Properties extension)

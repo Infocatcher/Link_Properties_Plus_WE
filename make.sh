@@ -2,7 +2,7 @@
 
 PROG=false
 XPI=link_properties_plus_we-latest.xpi
-FILES='_locales *.js *.json *.png *.html *.css'
+FILES='_locales *.js *.json *.png *.html *.css license*'
 
 for z in 7za 7z zip
 do
