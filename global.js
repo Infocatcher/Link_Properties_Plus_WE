@@ -5,6 +5,7 @@ var prefs = {
 
 	openInTab: false,
 	windowPosition: {},
+	restoreWindowPosition: false,
 
 	showResponseStatus: true,
 	showDirectURI: true,

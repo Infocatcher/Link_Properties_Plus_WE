@@ -83,9 +83,9 @@ function openLinkPropertiesInWindow(url, sourceTab) {
 		height: p.h || 480
 	}).then(function(win) {
 		// Force move window (note: looks buggy)
-		//browser.windows.update(win.id, {
-		//	left:   p.x || 0,
-		//	top:    p.y || 0
-		//});
+		prefs.restoreWindowPosition && browser.windows.update(win.id, {
+			left: p.x || 0,
+			top:  p.y || 0
+		});
 	});
 }
