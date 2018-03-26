@@ -10,9 +10,10 @@ function destroy() {
 function loadOptions() {
 	for(var id in prefs)
 		loadOption(id, prefs[id]);
+	checkSubItems();
 }
 function loadOption(id, val) {
-	var node = document.getElementById(id);
+	var node = $(id);
 	node && setValue(node, val);
 }
 function saveOption(e) {
@@ -22,6 +23,10 @@ function saveOption(e) {
 	(save.prefs || (save.prefs = {}))[node.id] = getValue(node);
 	if(!save.timer)
 		save.timer = setTimeout(save, Date.now() - (save.last || 0) < 1000 ? 400 : 20);
+	checkSubItems();
+}
+function checkSubItems() {
+	$("restoreWindowPosition").disabled = $("openInTab").checked;
 }
 function save() {
 	_log("Save: " + JSON.stringify(save.prefs));
@@ -42,6 +47,9 @@ function setValue(node, val) {
 		node.checked = val;
 	else
 		node.value = val;
+}
+function $(id) {
+	return document.getElementById(id);
 }
 
 init();
