@@ -26,7 +26,7 @@ function saveOption(e) {
 	checkSubItems();
 }
 function checkSubItems() {
-	$("restoreWindowPosition").disabled = $("openInTab").checked;
+	$("restoreWindowPosition").disabled = !$("openInWindow").checked;
 }
 function save() {
 	_log("Save: " + JSON.stringify(save.prefs));

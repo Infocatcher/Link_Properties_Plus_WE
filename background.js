@@ -1,5 +1,10 @@
 readPrefs(function() {
 	_log("Prefs loaded");
+	"openInTab" in prefs && browser.storage.local.set({
+		openInWindow: !prefs.openInTab
+	}).then(function() {
+		browser.storage.local.remove("openInTab");
+	});
 });
 
 browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
@@ -47,10 +52,10 @@ function openLinkProperties(url, ref, sourceTab, autoStart) {
 			browser.tabs.update(tab.id, { active: true });
 			browser.windows.update(tab.windowId, { focused: true, drawAttention: true });
 		}
-		else if(prefs.openInTab)
-			openLinkPropertiesInTab(url, sourceTab);
-		else
+		else if(prefs.openInWindow)
 			openLinkPropertiesInWindow(url, sourceTab);
+		else
+			openLinkPropertiesInTab(url, sourceTab);
 	});
 }
 function findTabByURL(url, incognito, callback) {

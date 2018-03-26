@@ -3,7 +3,7 @@ const LOG_PREFIX = "[Link Properties Plus WE] ";
 var prefs = {
 	debug: true,
 
-	openInTab: false,
+	openInWindow: true,
 	windowPosition: {},
 	restoreWindowPosition: false,
 
