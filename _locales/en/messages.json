@@ -59,8 +59,11 @@
 		"message": "HTTP Headers:"
 	},
 
-	"openInTab": {
-		"message": "Open in tab"
+	"openInWindow": {
+		"message": "Open in window"
+	},
+	"restoreWindowPosition": {
+		"message": "Restore window position"
 	},
 	"showResponseStatus": {
 		"message": "Response status"

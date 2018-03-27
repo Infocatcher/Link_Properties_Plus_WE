@@ -59,8 +59,11 @@
 		"message": "Заголовки HTTP:"
 	},
 
-	"openInTab": {
-		"message": "Открывать во вкладке"
+	"openInWindow": {
+		"message": "Открывать в окне"
+	},
+	"restoreWindowPosition": {
+		"message": "Восстанавливать положение окна"
 	},
 	"showResponseStatus": {
 		"message": "Статус ответа"

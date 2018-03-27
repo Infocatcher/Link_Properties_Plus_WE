@@ -59,8 +59,11 @@
 		"message": "HTTP响应头:"
 	},
 
-	"openInTab": {
-		"message": "Open in tab"
+	"openInWindow": {
+		"message": "Open in window"
+	},
+	"restoreWindowPosition": {
+		"message": "Restore window position"
 	},
 	"showResponseStatus": {
 		"message": "响应状态"
