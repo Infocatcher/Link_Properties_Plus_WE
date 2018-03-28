@@ -38,6 +38,14 @@
 			"32": "icon-32.png"
 		}
 	},
+	"commands": {
+		"_execute_browser_action": {
+			"suggested_key": {
+				"default": "Alt+Shift+L"
+			},
+			"description": "__MSG_extensionName__"
+		}
+	},
 	"icons": {
 		"16": "icon-16.png",
 		"32": "icon-32.png"
