@@ -435,10 +435,14 @@ function safeHTML(s) {
 }
 function notifyUI(reason) {
 	var root = document.documentElement;
-	clearTimeout(notifyUI.timer || 0);
-	root.setAttribute("lpp_notify", reason);
-	notifyUI.timer = setTimeout(function() {
-		root.removeAttribute("lpp_notify");
+	var reasons = (root.getAttribute("lpp_notify") || "") + " " + reason;
+	root.setAttribute("lpp_notify", reasons);
+	setTimeout(function() {
+		reasons = (root.getAttribute("lpp_notify") || "").replace(" " + reason, "");
+		if(reasons)
+			root.setAttribute("lpp_notify", reasons);
+		else
+			root.removeAttribute("lpp_notify");
 	}, 700);
 }
 function formatNum(n, precision = prefs.precision) {

@@ -107,11 +107,11 @@ label {
 	margin-inline-end: 2px;
 }
 
-:root[lpp_notify="fixedURL#url"] #url,
-:root[lpp_notify="fixedURL#referer"] #referer {
+:root[lpp_notify~="fixedURL#url"] #url,
+:root[lpp_notify~="fixedURL#referer"] #referer {
 	color: #090;
 }
-:root.darkBG[lpp_notify="fixedURL#url"] #url,
-:root.darkBG[lpp_notify="fixedURL#referer"] #referer {
+:root.darkBG[lpp_notify~="fixedURL#url"] #url,
+:root.darkBG[lpp_notify~="fixedURL#referer"] #referer {
 	color: #0b0;
 }
