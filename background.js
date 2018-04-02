@@ -75,7 +75,11 @@ function openLinkPropertiesInTab(url, sourceTab) {
 		active: true
 	});
 }
+var pendingWindows = {};
 function openLinkPropertiesInWindow(url, sourceTab) {
+	if(url in pendingWindows && Date.now() - pendingWindows[url] < 5e3)
+		return;
+	pendingWindows[url] = Date.now();
 	var p = prefs.windowPosition || {};
 	browser.windows.create({
 		url: url,
@@ -87,6 +91,9 @@ function openLinkPropertiesInWindow(url, sourceTab) {
 		width:  p.w || 640,
 		height: p.h || 480
 	}).then(function(win) {
+		setTimeout(function() {
+			delete pendingWindows[url];
+		}, 250);
 		// Force move window (note: looks buggy)
 		prefs.restoreWindowPosition && browser.windows.update(win.id, {
 			left: p.x || 0,
