@@ -266,7 +266,7 @@ function showProperties(request, error) {
 	else
 		[request, error] = showProperties.lastArgs || [];
 
-	var size = request.getResponseHeader("Content-Length");
+	var size = request._lpp_size = request._lpp_size || request.getResponseHeader("Content-Length");
 	var intSize = parseInt(size);
 	if(intSize >= 0) {
 		size = formatNum(intSize, 0);
@@ -287,7 +287,8 @@ function showProperties(request, error) {
 			: browser.i18n.getMessage("bytes", size);
 	}
 
-	var date = request.getResponseHeader("Last-Modified")
+	var date = request._lpp_date = request._lpp_date
+		|| request.getResponseHeader("Last-Modified")
 		|| request.getResponseHeader("X-Archive-Orig-Last-Modified")
 		|| "";
 	var dt = date && new Date(date);
@@ -301,7 +302,7 @@ function showProperties(request, error) {
 		$("date").textContent = dt.toLocaleString(); // Fallback for "invalid language tag" error
 	}
 
-	var type = request.getResponseHeader("Content-Type");
+	var type = request._lpp_type = request._lpp_type || request.getResponseHeader("Content-Type");
 	$("type").textContent = type;
 
 	var status = request._lpp_status = request._lpp_status || request.status;
@@ -320,7 +321,7 @@ function showProperties(request, error) {
 	);
 
 	// Note: request.responseURL doesn't contain #hash part
-	var directRaw = request._lpp_directURL || request.responseURL;
+	var directRaw = request._lpp_direct = request._lpp_direct || request._lpp_directURL || request.responseURL;
 	var direct = mayDecodeURL(directRaw);
 	var isSame = isSameURL(direct, request._lpp_requestURL);
 	if(isSame)
