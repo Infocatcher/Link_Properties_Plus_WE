@@ -164,7 +164,7 @@ function sendRequest(url, referer, tabId) {
 	sendRequest.cleanup && sendRequest.cleanup();
 	$("get").disabled = true;
 	var request = sendRequest.request = new XMLHttpRequest();
-	request._requestURL = normalizeURL(url); // Perform fixups like http://example.com -> http://example.com/
+	request._lpp_requestURL = normalizeURL(url); // Perform fixups like http://example.com -> http://example.com/
 	request.open("HEAD", url, true);
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
 	//referer && request.setRequestHeader("Referer", referer);
@@ -187,7 +187,7 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
-		request._directURL = e.url;
+		request._lpp_directURL = e.url;
 		if(hasHeaders)
 			return;
 		hasHeaders = true;
@@ -304,8 +304,8 @@ function showProperties(request, error) {
 	var type = request.getResponseHeader("Content-Type");
 	$("type").textContent = type;
 
-	var status = request._status = request._status || request.status;
-	var statusText = request._statusText = request._statusText || request.statusText;
+	var status = request._lpp_status = request._lpp_status || request.status;
+	var statusText = request._lpp_statusText = request._lpp_statusText || request.statusText;
 	var statusStr = status + (statusText ? " " + statusText : "");
 	if(status >= 400 && status < 600)
 		$("status").innerHTML = '<em class="missing">' + safeHTML(statusStr) + '</em>';
@@ -320,9 +320,9 @@ function showProperties(request, error) {
 	);
 
 	// Note: request.responseURL doesn't contain #hash part
-	var directRaw = request._directURL || request.responseURL;
+	var directRaw = request._lpp_directURL || request.responseURL;
 	var direct = mayDecodeURL(directRaw);
-	var isSame = isSameURL(direct, request._requestURL);
+	var isSame = isSameURL(direct, request._lpp_requestURL);
 	if(isSame)
 		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
 	else
