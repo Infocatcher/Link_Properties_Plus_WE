@@ -164,7 +164,8 @@ function sendRequest(url, referer, tabId) {
 	sendRequest.cleanup && sendRequest.cleanup();
 	$("get").disabled = true;
 	var request = sendRequest.request = new XMLHttpRequest();
-	request._lpp_requestURL = normalizeURL(url); // Perform fixups like http://example.com -> http://example.com/
+	request._lpp = {};
+	request._lpp.requestURL = normalizeURL(url); // Perform fixups like http://example.com -> http://example.com/
 	request.open("HEAD", url, true);
 	// Doesn't work: Attempt to set a forbidden header was denied: Referer
 	//referer && request.setRequestHeader("Referer", referer);
@@ -187,7 +188,7 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
-		request._lpp_directURL = e.url;
+		request._lpp.directURL = e.url;
 		if(hasHeaders)
 			return;
 		hasHeaders = true;
@@ -266,7 +267,7 @@ function showProperties(request, error) {
 	else
 		[request, error] = showProperties.lastArgs || [];
 
-	var size = request._lpp_size = request._lpp_size || request.getResponseHeader("Content-Length");
+	var size = request._lpp.size = request._lpp.size || request.getResponseHeader("Content-Length");
 	var intSize = parseInt(size);
 	if(intSize >= 0) {
 		size = formatNum(intSize, 0);
@@ -287,7 +288,7 @@ function showProperties(request, error) {
 			: browser.i18n.getMessage("bytes", size);
 	}
 
-	var date = request._lpp_date = request._lpp_date
+	var date = request._lpp.date = request._lpp.date
 		|| request.getResponseHeader("Last-Modified")
 		|| request.getResponseHeader("X-Archive-Orig-Last-Modified")
 		|| "";
@@ -302,11 +303,11 @@ function showProperties(request, error) {
 		$("date").textContent = dt.toLocaleString(); // Fallback for "invalid language tag" error
 	}
 
-	var type = request._lpp_type = request._lpp_type || request.getResponseHeader("Content-Type");
+	var type = request._lpp.type = request._lpp.type || request.getResponseHeader("Content-Type");
 	$("type").textContent = type;
 
-	var status = request._lpp_status = request._lpp_status || request.status;
-	var statusText = request._lpp_statusText = request._lpp_statusText || request.statusText;
+	var status = request._lpp.status = request._lpp.status || request.status;
+	var statusText = request._lpp.statusText = request._lpp.statusText || request.statusText;
 	var statusStr = status + (statusText ? " " + statusText : "");
 	if(status >= 400 && status < 600)
 		$("status").innerHTML = '<em class="missing">' + safeHTML(statusStr) + '</em>';
@@ -321,9 +322,9 @@ function showProperties(request, error) {
 	);
 
 	// Note: request.responseURL doesn't contain #hash part
-	var directRaw = request._lpp_direct = request._lpp_direct || request._lpp_directURL || request.responseURL;
+	var directRaw = request._lpp.direct = request._lpp.direct || request._lpp.directURL || request.responseURL;
 	var direct = mayDecodeURL(directRaw);
-	var isSame = isSameURL(direct, request._lpp_requestURL);
+	var isSame = isSameURL(direct, request._lpp.requestURL);
 	if(isSame)
 		$("direct").innerHTML = '<em class="unchanged">' + safeHTML(direct) + '</em>';
 	else
