@@ -66,6 +66,7 @@
 		}
 	},
 	"kibibytes": {
+		"description": "See http://en.wikipedia.org/wiki/Binary_prefix",
 		"message": "$XB$ KiB ($B$ 字节)",
 		"placeholders": {
 			"xb": { "content": "$1" },

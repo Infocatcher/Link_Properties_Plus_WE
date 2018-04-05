@@ -66,6 +66,7 @@
 		}
 	},
 	"kibibytes": {
+		"description": "See http://fr.wikipedia.org/wiki/Préfixe_binaire",
 		"message": "$XB$ Kio ($B$ octets)",
 		"placeholders": {
 			"xb": { "content": "$1" },

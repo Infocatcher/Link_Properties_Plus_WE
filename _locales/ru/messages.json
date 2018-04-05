@@ -66,6 +66,7 @@
 		}
 	},
 	"kibibytes": {
+		"description": "See http://ru.wikipedia.org/wiki/Двоичные_приставки",
 		"message": "$XB$ Кбайт ($B$ байт)",
 		"placeholders": {
 			"xb": { "content": "$1" },

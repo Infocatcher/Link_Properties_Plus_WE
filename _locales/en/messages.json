@@ -66,6 +66,7 @@
 		}
 	},
 	"kibibytes": {
+		"description": "See http://en.wikipedia.org/wiki/Binary_prefix",
 		"message": "$XB$ KiB ($B$ bytes)",
 		"placeholders": {
 			"xb": { "content": "$1" },
