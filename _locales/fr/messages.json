@@ -59,34 +59,6 @@
 		"message": "En-têtes HTTP :"
 	},
 
-	"openInWindow": {
-		"message": "Open in window"
-	},
-	"restoreWindowPosition": {
-		"message": "Restore window position"
-	},
-	"showResponseStatus": {
-		"message": "Statut"
-	},
-	"showDirectURI": {
-		"message": "Lien direct"
-	},
-	"showHttpHeaders": {
-		"message": "En-têtes HTTP"
-	},
-	"decodeURIs": {
-		"message": "Décoder les URIs"
-	},
-	"precision": {
-		"message": "Arrondir la taille du fichier à :"
-	},
-	"useBinaryPrefixes": {
-		"message": "Utiliser les préfixes binaires (1 Kio = 1024 octets)"
-	},
-	"debug": {
-		"message": "Debug mode"
-	},
-
 	"bytes": {
 		"message": "$B$ octets",
 		"placeholders": {
@@ -166,5 +138,34 @@
 	},
 	"response": {
 		"message": "Réponse"
+	},
+
+	"openInWindow": {
+		"message": "Open in window"
+	},
+	"restoreWindowPosition": {
+		"message": "Restore window position"
+	},
+	"showResponseStatus": {
+		"message": "Statut"
+	},
+	"showDirectURI": {
+		"message": "Lien direct"
+	},
+	"showHttpHeaders": {
+		"message": "En-têtes HTTP"
+	},
+	"decodeURIs": {
+		"message": "Décoder les URIs"
+	},
+	"useBinaryPrefixes": {
+		"message": "Utiliser les préfixes binaires (1 Kio = 1024 octets)"
+	},
+	"precision": {
+		"message": "Arrondir la taille du fichier à :"
+	},
+
+	"debug": {
+		"message": "Debug mode"
 	}
 }

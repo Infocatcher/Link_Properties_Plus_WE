@@ -59,34 +59,6 @@
 		"message": "HTTP响应头:"
 	},
 
-	"openInWindow": {
-		"message": "Open in window"
-	},
-	"restoreWindowPosition": {
-		"message": "Restore window position"
-	},
-	"showResponseStatus": {
-		"message": "响应状态"
-	},
-	"showDirectURI": {
-		"message": "实际链接"
-	},
-	"showHttpHeaders": {
-		"message": "HTTP响应头"
-	},
-	"decodeURIs": {
-		"message": "解码URI"
-	},
-	"precision": {
-		"message": "文件大小小数位数:"
-	},
-	"useBinaryPrefixes": {
-		"message": "使用二进制规范 (1 KiB=1024 字节)"
-	},
-	"debug": {
-		"message": "Debug mode"
-	},
-
 	"bytes": {
 		"message": "$B$ bytes",
 		"placeholders": {
@@ -166,5 +138,34 @@
 	},
 	"response": {
 		"message": "响应信息"
+	},
+
+	"openInWindow": {
+		"message": "Open in window"
+	},
+	"restoreWindowPosition": {
+		"message": "Restore window position"
+	},
+	"showResponseStatus": {
+		"message": "响应状态"
+	},
+	"showDirectURI": {
+		"message": "实际链接"
+	},
+	"showHttpHeaders": {
+		"message": "HTTP响应头"
+	},
+	"decodeURIs": {
+		"message": "解码URI"
+	},
+	"useBinaryPrefixes": {
+		"message": "使用二进制规范 (1 KiB=1024 字节)"
+	},
+	"precision": {
+		"message": "文件大小小数位数:"
+	},
+
+	"debug": {
+		"message": "Debug mode"
 	}
 }

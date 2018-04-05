@@ -59,34 +59,6 @@
 		"message": "HTTP Headers:"
 	},
 
-	"openInWindow": {
-		"message": "Open in window"
-	},
-	"restoreWindowPosition": {
-		"message": "Restore window position"
-	},
-	"showResponseStatus": {
-		"message": "Response status"
-	},
-	"showDirectURI": {
-		"message": "Direct link"
-	},
-	"showHttpHeaders": {
-		"message": "HTTP headers"
-	},
-	"decodeURIs": {
-		"message": "Decode URIs"
-	},
-	"precision": {
-		"message": "Round file size to:"
-	},
-	"useBinaryPrefixes": {
-		"message": "Use binary prefixes (1 KiB = 1024 bytes)"
-	},
-	"debug": {
-		"message": "Debug mode"
-	},
-
 	"bytes": {
 		"message": "$B$ bytes",
 		"placeholders": {
@@ -166,5 +138,34 @@
 	},
 	"response": {
 		"message": "Response"
+	},
+
+	"openInWindow": {
+		"message": "Open in window"
+	},
+	"restoreWindowPosition": {
+		"message": "Restore window position"
+	},
+	"showResponseStatus": {
+		"message": "Response status"
+	},
+	"showDirectURI": {
+		"message": "Direct link"
+	},
+	"showHttpHeaders": {
+		"message": "HTTP headers"
+	},
+	"decodeURIs": {
+		"message": "Decode URIs"
+	},
+	"useBinaryPrefixes": {
+		"message": "Use binary prefixes (1 KiB = 1024 bytes)"
+	},
+	"precision": {
+		"message": "Round file size to:"
+	},
+
+	"debug": {
+		"message": "Debug mode"
 	}
 }

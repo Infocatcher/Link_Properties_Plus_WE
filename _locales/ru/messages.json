@@ -59,34 +59,6 @@
 		"message": "Заголовки HTTP:"
 	},
 
-	"openInWindow": {
-		"message": "Открывать в окне"
-	},
-	"restoreWindowPosition": {
-		"message": "Восстанавливать положение окна"
-	},
-	"showResponseStatus": {
-		"message": "Статус ответа"
-	},
-	"showDirectURI": {
-		"message": "Прямая ссылка"
-	},
-	"showHttpHeaders": {
-		"message": "Заголовки HTTP"
-	},
-	"decodeURIs": {
-		"message": "Декодировать ссылки"
-	},
-	"precision": {
-		"message": "Округлять размер файлов до:"
-	},
-	"useBinaryPrefixes": {
-		"message": "Использовать двоичные приставки (1 Кбайт = 1024 байт)"
-	},
-	"debug": {
-		"message": "Отладочный режим"
-	},
-
 	"bytes": {
 		"message": "$B$ байт",
 		"placeholders": {
@@ -166,5 +138,34 @@
 	},
 	"response": {
 		"message": "Ответ"
+	},
+
+	"openInWindow": {
+		"message": "Открывать в окне"
+	},
+	"restoreWindowPosition": {
+		"message": "Восстанавливать положение окна"
+	},
+	"showResponseStatus": {
+		"message": "Статус ответа"
+	},
+	"showDirectURI": {
+		"message": "Прямая ссылка"
+	},
+	"showHttpHeaders": {
+		"message": "Заголовки HTTP"
+	},
+	"decodeURIs": {
+		"message": "Декодировать ссылки"
+	},
+	"useBinaryPrefixes": {
+		"message": "Использовать двоичные приставки (1 Кбайт = 1024 байт)"
+	},
+	"precision": {
+		"message": "Округлять размер файлов до:"
+	},
+
+	"debug": {
+		"message": "Отладочный режим"
 	}
 }
