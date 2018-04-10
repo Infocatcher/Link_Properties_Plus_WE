@@ -7,6 +7,8 @@ var prefs = {
 	windowPosition: {},
 	restoreWindowPosition: false,
 
+	openPropertiesKey: "Alt+Shift+L",
+
 	showResponseStatus: true,
 	showDirectURI: true,
 	showHttpHeaders: true,

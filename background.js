@@ -5,7 +5,12 @@ readPrefs(function() {
 	}).then(function() {
 		browser.storage.local.remove("openInTab");
 	});
+	updateHotkey();
 });
+function onPrefChanged(key, newVal) {
+	if(key == "openPropertiesKey")
+		updateHotkey();
+}
 
 browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 	if(msg.action == "getTabId")
@@ -34,6 +39,15 @@ browser.browserAction.onClicked.addListener(function() {
 //browser.commands.onCommand.addListener(function(command) {
 //	_log("commands.onCommand: " + command);
 //});
+function updateHotkey() {
+	// Firefox 60+
+	browser.commands.update && setTimeout(function() {
+		browser.commands.update({
+			name: "_execute_browser_action",
+			shortcut: prefs.openPropertiesKey
+		});
+	}, 0);
+}
 
 var broadcastChannel = new BroadcastChannel("LPP:windowPosition");
 broadcastChannel.onmessage = function(msg) {
