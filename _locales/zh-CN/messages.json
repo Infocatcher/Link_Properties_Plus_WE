@@ -147,6 +147,9 @@
 	"restoreWindowPosition": {
 		"message": "Restore window position"
 	},
+	"keyboardShortcut": {
+		"message": "Keyboard shortcut:"
+	},
 	"showResponseStatus": {
 		"message": "响应状态"
 	},

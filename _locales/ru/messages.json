@@ -147,6 +147,9 @@
 	"restoreWindowPosition": {
 		"message": "Восстанавливать положение окна"
 	},
+	"keyboardShortcut": {
+		"message": "Сочетание клавиш:"
+	},
 	"showResponseStatus": {
 		"message": "Статус ответа"
 	},
