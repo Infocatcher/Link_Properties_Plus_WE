@@ -6,6 +6,8 @@
 `*` – improved<br>
 
 ##### master/HEAD
+`+` Added ability to configure hotkey.<br>
+
 ##### 0.1a2 (2018-04-06)
 `+` Added locales from original Link Properties Plus.<br>
 `+` Added options to hide output items.<br>
