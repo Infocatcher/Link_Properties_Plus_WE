@@ -11,6 +11,7 @@ function loadOptions() {
 	for(var id in prefs)
 		loadOption(id, prefs[id]);
 	checkSubItems();
+	validateKey();
 }
 function loadOption(id, val) {
 	var node = $(id);
@@ -18,15 +19,29 @@ function loadOption(id, val) {
 }
 function saveOption(e) {
 	var node = e.target;
-	if(!(node.id in prefs))
+	var id = node.id;
+	if(!(id in prefs))
 		return;
-	(save.prefs || (save.prefs = {}))[node.id] = getValue(node);
+	(save.prefs || (save.prefs = {}))[id] = getValue(node);
 	if(!save.timer)
 		save.timer = setTimeout(save, Date.now() - (save.last || 0) < 1000 ? 400 : 20);
-	checkSubItems();
+	if(id == "openInWindow")
+		checkSubItems();
+	else if(id == "openPropertiesKey")
+		validateKey();
 }
 function checkSubItems() {
 	$("restoreWindowPosition").disabled = !$("openInWindow").checked;
+}
+function validateKey() {
+	var inp = $("openPropertiesKey");
+	var key = inp.value;
+	// Patterns from error message
+	// Type error for parameter detail (Error processing shortcut: Value "..." must either: match the pattern ...
+	var isValid = /^\s*(Alt|Ctrl|Command|MacCtrl)\s*\+\s*(Shift\s*\+\s*)?([A-Z0-9]|Comma|Period|Home|End|PageUp|PageDown|Space|Insert|Delete|Up|Down|Left|Right)\s*$/.test(key)
+		|| /^\s*((Alt|Ctrl|Command|MacCtrl)\s*\+\s*)?(Shift\s*\+\s*)?(F[1-9]|F1[0-2])\s*$/.test(key)
+		|| /^(MediaNextTrack|MediaPlayPause|MediaPrevTrack|MediaStop)$/.test(key);
+	inp.classList.toggle("error", !isValid);
 }
 function save() {
 	_log("Save: " + JSON.stringify(save.prefs));
