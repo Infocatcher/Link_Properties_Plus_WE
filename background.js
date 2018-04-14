@@ -9,7 +9,7 @@ readPrefs(function() {
 });
 function onPrefChanged(key, newVal) {
 	if(key == "openPropertiesKey")
-		updateHotkey();
+		updateHotkey(250);
 }
 
 browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
@@ -39,14 +39,18 @@ browser.browserAction.onClicked.addListener(function() {
 //browser.commands.onCommand.addListener(function(command) {
 //	_log("commands.onCommand: " + command);
 //});
-function updateHotkey() {
-	// Firefox 60+
-	browser.commands.update && setTimeout(function() {
+function updateHotkey(delay = 0) {
+	if(!("update" in browser.commands)) // Firefox 60+
+		return;
+	if(updateHotkey.timer || 0)
+		return;
+	updateHotkey.timer = setTimeout(function() {
+		updateHotkey.timer = 0;
 		browser.commands.update({
 			name: "_execute_browser_action",
 			shortcut: prefs.openPropertiesKey
 		});
-	}, 0);
+	}, delay);
 }
 
 var broadcastChannel = new BroadcastChannel("LPP:windowPosition");
