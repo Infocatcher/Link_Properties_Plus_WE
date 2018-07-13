@@ -46,10 +46,15 @@ function updateHotkey(delay = 0) {
 		return;
 	updateHotkey.timer = setTimeout(function() {
 		updateHotkey.timer = 0;
-		browser.commands.update({
-			name: "_execute_browser_action",
-			shortcut: prefs.openPropertiesKey
-		});
+		if(prefs.openPropertiesKey) {
+			browser.commands.update({
+				name: "_execute_browser_action",
+				shortcut: prefs.openPropertiesKey
+			});
+		}
+		else {
+			browser.commands.reset("_execute_browser_action");
+		}
 	}, delay);
 }
 
