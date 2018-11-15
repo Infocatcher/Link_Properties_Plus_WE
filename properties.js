@@ -1,3 +1,4 @@
+setTitle(); // Set initial title
 readPrefs(function() {
 	_log("Prefs loaded");
 	loadState(true);
@@ -394,15 +395,17 @@ function $(id) {
 	return document.getElementById(id);
 }
 function setState(url, ref, forceReplaceState) {
-	var title = url
-		? browser.i18n.getMessage("linkPropertiesTitle", url)
-		: browser.i18n.getMessage("linkProperties");
 	var pageUrl = getPropertiesURL(url, ref, true);
 	var meth = forceReplaceState || isSameURL(pageUrl, location.href)
 		? "replaceState"
 		: "pushState";
 	history[meth]("", "", pageUrl);
-	document.title = title;
+	setTitle(url);
+}
+function setTitle(url) {
+	document.title = url
+		? browser.i18n.getMessage("linkPropertiesTitle", url)
+		: browser.i18n.getMessage("linkProperties");
 }
 function headerHTML(name, val) {
 	return '<div class="header-entry">'
