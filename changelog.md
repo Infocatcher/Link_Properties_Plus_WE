@@ -7,6 +7,8 @@
 
 ##### master/HEAD
 `+` Added ability to configure hotkey.<br>
+`*` Don't use `__MSG_…__` localization key in window title: was visible as is at startup.<br>
+`+` Added update notice: WE API restrictions + link to classic version.<br>
 
 ##### 0.1a2 (2018-04-06)
 `+` Added locales from original Link Properties Plus.<br>
