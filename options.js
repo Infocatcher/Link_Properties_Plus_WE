@@ -1,4 +1,5 @@
 function init() {
+	$("updateNotice").innerHTML = browser.i18n.getMessage("updateNotice");
 	readPrefs(loadOptions);
 	addEventListener("input", saveOption);
 	addEventListener("unload", destroy, { once: true });
