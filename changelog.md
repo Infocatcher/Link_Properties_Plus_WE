@@ -6,6 +6,9 @@
 `*` – improved<br>
 
 ##### master/HEAD
+`*` Updated hotkey validation: mark as invalid only if browser.commands.update() failed.<br>
+`+` Added ability to close tab/window using Esc key.<br>
+
 ##### 2.0b1 (2019-01-05)
 `+` Added ability to configure hotkey.<br>
 `*` Don't use `__MSG_…__` localization key in window title: was visible as is at startup.<br>
