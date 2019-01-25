@@ -44,8 +44,10 @@ function onPrefChanged(key, newVal) {
 		showProperties();
 }
 
+var inWindow;
 browser.windows.getCurrent().then(function(win) {
-	if(win.type != "popup")
+	inWindow = win.type == "popup";
+	if(!inWindow)
 		return;
 
 	// Workaround for empty window with disabled e10s mode
@@ -364,7 +366,15 @@ function onKeyDown(e) {
 			getProperties();
 	}
 	else if(e.keyCode == (e.DOM_VK_ESCAPE || 27)) {
-		sendRequest.request && sendRequest.request.abort();
+		if(sendRequest.request)
+			sendRequest.request.abort();
+		else if(inWindow)
+			window.close();
+		else {
+			getTabId(function(tabId) {
+				browser.tabs.remove(tabId).catch(_err);
+			});
+		}
 	}
 }
 
