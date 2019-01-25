@@ -47,10 +47,23 @@ function updateHotkey(delay = 0) {
 	updateHotkey.timer = setTimeout(function() {
 		updateHotkey.timer = 0;
 		if(prefs.openPropertiesKey) {
-			browser.commands.update({
-				name: "_execute_browser_action",
-				shortcut: prefs.openPropertiesKey
-			});
+			try {
+				browser.commands.update({
+					name: "_execute_browser_action",
+					shortcut: prefs.openPropertiesKey
+				}).then(function() {
+					browser.runtime.sendMessage({
+						action: "shortcutValidation",
+						error: ""
+					});
+				});
+			}
+			catch(e) {
+				browser.runtime.sendMessage({
+					action: "shortcutValidation",
+					error: "" + e
+				});
+			}
 		}
 		else {
 			browser.commands.reset("_execute_browser_action");
