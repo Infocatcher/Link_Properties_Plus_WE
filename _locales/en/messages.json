@@ -153,6 +153,9 @@
 	"keyboardShortcut": {
 		"message": "Keyboard shortcut:"
 	},
+	"escToClose": {
+		"message": "Close tab/window using Esc key"
+	},
 	"showResponseStatus": {
 		"message": "Response status"
 	},

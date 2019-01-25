@@ -6,6 +6,7 @@ var prefs = {
 	openInWindow: true,
 	windowPosition: {},
 	restoreWindowPosition: false,
+	escToClose: true,
 
 	openPropertiesKey: "Alt+Shift+L",
 

@@ -368,6 +368,8 @@ function onKeyDown(e) {
 	else if(e.keyCode == (e.DOM_VK_ESCAPE || 27)) {
 		if(sendRequest.request)
 			sendRequest.request.abort();
+		else if(!prefs.escToClose)
+			return;
 		else if(inWindow)
 			window.close();
 		else {

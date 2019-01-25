@@ -153,6 +153,9 @@
 	"keyboardShortcut": {
 		"message": "Сочетание клавиш:"
 	},
+	"escToClose": {
+		"message": "Закрывать вкладку/окно клавишей Esc"
+	},
 	"showResponseStatus": {
 		"message": "Статус ответа"
 	},
