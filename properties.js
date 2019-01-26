@@ -247,9 +247,15 @@ function sendRequest(url, referer, tabId) {
 		browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
 		request.onreadystatechange = request.onabort = request.onerror = null;
 		request.abort();
+		var stopWait = Date.now() + 2e3;
+		var logged;
 		(function removeListeners() {
-			if(!hasHeaders) { // We should wait for great async API with onSendHeaders() after response
-				_log("sendRequest.cleanup() -> wait for onSendHeaders()");
+			if(!hasHeaders && Date.now() < stopWait) {
+				// We should wait for great async API with onSendHeaders() after response
+				if(!logged) {
+					logged = true;
+					_log("sendRequest.cleanup() -> wait for onSendHeaders()");
+				}
 				setTimeout(removeListeners, 10);
 				return;
 			}
