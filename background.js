@@ -121,6 +121,8 @@ function extractURI(str) {
 		"[": "]",
 		"{": "}",
 		"<": ">",
+		"«": "»",
+		"“": "”",
 		__proto__: null
 	};
 	for(var b in brackets)
