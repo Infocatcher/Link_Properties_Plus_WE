@@ -180,6 +180,7 @@ function sendRequest(url, referer, tabId) {
 		tabId: tabId
 	};
 	function onBeforeSendHeaders(e) {
+		_log("onBeforeSendHeaders()");
 		var headers = e.requestHeaders;
 		(function getRefererHeader() {
 			for(var header of headers)
@@ -191,6 +192,7 @@ function sendRequest(url, referer, tabId) {
 		return { requestHeaders: headers };
 	}
 	function onSendHeaders(e) {
+		_log("onBeforeSendHeaders()");
 		request._lpp.directURL = e.url;
 		if(hasHeaders)
 			return;
@@ -233,6 +235,7 @@ function sendRequest(url, referer, tabId) {
 		filter
 	);
 	var cleanup = sendRequest.cleanup = function() {
+		_log("sendRequest.cleanup()");
 		if(redirects.length > 1) {
 			$("direct").title = redirects.map(function(url, i) {
 				return (i ? "⇒ " : browser.i18n.getMessage("redirectsHeader", redirects.length - 1) + "\n")
@@ -241,10 +244,19 @@ function sendRequest(url, referer, tabId) {
 		}
 		sendRequest.cleanup = sendRequest.request = null;
 		browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
-		browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
-		browser.webRequest.onBeforeRedirect.removeListener(onBeforeRedirect);
+		_log("sendRequest.cleanup() -> onBeforeSendHeaders.removeListener()");
 		request.onreadystatechange = request.onabort = request.onerror = null;
 		request.abort();
+		(function removeListeners() {
+			if(!hasHeaders) { // We should wait for great async API with onSendHeaders() after response
+				_log("sendRequest.cleanup() -> wait for onSendHeaders()");
+				setTimeout(removeListeners, 10);
+				return;
+			}
+			_log("sendRequest.cleanup() -> removeListeners()");
+			browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
+			browser.webRequest.onBeforeRedirect.removeListener(onBeforeRedirect);
+		})();
 	};
 
 	request.onreadystatechange = function() {
