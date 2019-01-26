@@ -22,22 +22,30 @@ var miLabel = browser.i18n.getMessage("linkProperties");
 browser.contextMenus.create({
 	id: "linkProperties",
 	title: miLabel,
-	contexts: canUpdateMenu ? ["link", "selection"] : ["link"]
+	contexts: ["link"]
 });
-canUpdateMenu && browser.contextMenus.onShown.addListener(function(info) {
-	var uri = getContextURI(info);
-	if(!info.linkUrl) {
+if(canUpdateMenu) {
+	browser.contextMenus.create({
+		id: "linkProperties-selection",
+		title: miLabel,
+		visible: false,
+		contexts: ["selection"]
+	});
+	browser.contextMenus.onShown.addListener(function(info) {
+		if(!info.selectionText)
+			return;
+		var uri = extractURI(info.selectionText);
 		var maxLen = 25;
 		try { var decoded = decodeURI(uri); }
 		catch(e) { decoded = uri; }
 		var label = miLabel + " " + (decoded.length > maxLen ? decoded.substr(0, maxLen) + "…" : decoded);
-	}
-	browser.contextMenus.update("linkProperties", {
-		visible: !!uri,
-		title: label || miLabel
+		browser.contextMenus.update("linkProperties-selection", {
+			visible: !!(uri && !info.linkUrl),
+			title: label
+		});
+		browser.contextMenus.refresh();
 	});
-	browser.contextMenus.refresh();
-});
+}
 function getContextURI(info) {
 	return info.linkUrl || extractURI(info.selectionText);
 }
