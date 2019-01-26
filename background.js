@@ -17,16 +17,26 @@ browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 		sendResponse(sender.tab && sender.tab.id);
 });
 
+var canUpdateMenu = "onShown" in browser.contextMenus; // Firefox 60+
 browser.contextMenus.create({
 	id: "linkProperties",
 	title: browser.i18n.getMessage("linkProperties"),
-	contexts: ["link"]
+	contexts: canUpdateMenu ? ["link", "selection"] : ["link"]
 });
+canUpdateMenu && browser.contextMenus.onShown.addListener(function(info) {
+	browser.contextMenus.update("linkProperties", {
+		visible: !!getContextURI(info)
+	});
+	browser.contextMenus.refresh();
+});
+function getContextURI(info) {
+	return info.linkUrl || extractURI(info.selectionText);
+}
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
 	var miId = info.menuItemId;
 	_log("contextMenus.onClicked: " + miId);
-	openLinkProperties(info.linkUrl, info.frameUrl || info.pageUrl, tab, true);
+	openLinkProperties(getContextURI(info), info.frameUrl || info.pageUrl, tab, true);
 });
 
 
@@ -79,6 +89,10 @@ broadcastChannel.onmessage = function(msg) {
 addEventListener("unload", function() {
     broadcastChannel.close();
 }, { once: true });
+
+function extractURI(str) {
+	return /https?:\/\/\S+/.test(str) && RegExp.lastMatch;
+}
 
 function openLinkProperties(url, ref, sourceTab, autoStart) {
 	var url = getPropertiesURL(url, ref, autoStart);
