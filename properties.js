@@ -213,7 +213,8 @@ function sendRequest(url, referer, tabId) {
 		spacer.className = "header-spacer";
 		spacer.appendChild(document.createElement("br"));
 		df.appendChild(spacer);
-		$("headers").appendChild(df);
+		var hs = $("headers");
+		hs.insertBefore(df, hs.firstChild); // Always show request before response
 	}
 	function onBeforeRedirect(e) {
 		if(!redirects.length)
@@ -244,7 +245,6 @@ function sendRequest(url, referer, tabId) {
 		}
 		sendRequest.cleanup = sendRequest.request = null;
 		browser.webRequest.onBeforeSendHeaders.removeListener(onBeforeSendHeaders);
-		_log("sendRequest.cleanup() -> onBeforeSendHeaders.removeListener()");
 		request.onreadystatechange = request.onabort = request.onerror = null;
 		request.abort();
 		(function removeListeners() {
