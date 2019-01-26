@@ -6,6 +6,7 @@
 `*` – improved<br>
 
 ##### master/HEAD
+##### 2.0b2 (2019-01-26)
 `*` Updated hotkey validation: mark as invalid only if browser.commands.update() failed.<br>
 `+` Added ability to close tab/window using Esc key.<br>
 `x` Workaround to show request headers in case of browser.webRequest.onSendHeaders notification after server response.<br>
