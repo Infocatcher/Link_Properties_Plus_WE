@@ -91,7 +91,33 @@ addEventListener("unload", function() {
 }, { once: true });
 
 function extractURI(str) {
-	return /https?:\/\/\S+/.test(str) && RegExp.lastMatch;
+	// Based on code from Link Properties Plus, see linkPropsPlusCmd.extractURI()
+	// https://github.com/Infocatcher/Link_Properties_Plus/blob/1.6.1/chrome/content/overlayMainWindowCmd.js#L21
+	var detectionThreshold = 200;
+	if(!/https?:\/\/\S+/.test(str))
+		return "";
+	var uri = RegExp.lastMatch;
+	var before = RegExp.leftContext;
+	var after = RegExp.rightContext;
+	before = before.trimRight();
+	after = after.trimLeft();
+	if(
+		before.length > detectionThreshold
+		|| after.length > detectionThreshold
+	)
+		return "";
+	uri = uri.replace(/".*$/, "");
+	var brackets = {
+		"(": ")",
+		"[": "]",
+		"{": "}",
+		"<": ">",
+		__proto__: null
+	};
+	for(var b in brackets)
+		if(uri.indexOf(b) == -1)
+			uri = uri.replace(new RegExp("\\" + brackets[b] + ".*$"), "");
+	return uri.replace(/[.,;]$/, "");
 }
 
 function openLinkProperties(url, ref, sourceTab, autoStart) {
