@@ -18,14 +18,23 @@ browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 });
 
 var canUpdateMenu = "onShown" in browser.contextMenus; // Firefox 60+
+var miLabel = browser.i18n.getMessage("linkProperties");
 browser.contextMenus.create({
 	id: "linkProperties",
-	title: browser.i18n.getMessage("linkProperties"),
+	title: miLabel,
 	contexts: canUpdateMenu ? ["link", "selection"] : ["link"]
 });
 canUpdateMenu && browser.contextMenus.onShown.addListener(function(info) {
+	var uri = getContextURI(info);
+	if(!info.linkUrl) {
+		var maxLen = 25;
+		try { var decoded = decodeURI(uri); }
+		catch(e) { decoded = uri; }
+		var label = miLabel + " " + (decoded.length > maxLen ? decoded.substr(0, maxLen) + "…" : decoded);
+	}
 	browser.contextMenus.update("linkProperties", {
-		visible: !!getContextURI(info)
+		visible: !!uri,
+		title: label || miLabel
 	});
 	browser.contextMenus.refresh();
 });
