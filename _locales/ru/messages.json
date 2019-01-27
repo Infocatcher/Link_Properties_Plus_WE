@@ -55,7 +55,7 @@
 			"count": { "content": "$1" }
 		}
 	},
-	"httpHeaders:": {
+	"httpHeaders": {
 		"message": "Заголовки HTTP:"
 	},
 
