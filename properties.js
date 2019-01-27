@@ -109,6 +109,7 @@ addEventListener("unload", function() {
 	removeEventListener("popstate", onPopState);
 	removeEventListener("keydown", onKeyDown, true);
 	sendRequest.cleanup && sendRequest.cleanup();
+	sendRequest.removeListeners && sendRequest.removeListeners(true);
 	showProperties.lastArgs = null;
 }, { once: true });
 
@@ -249,8 +250,8 @@ function sendRequest(url, referer, tabId) {
 		request.abort();
 		var stopWait = Date.now() + 2e3;
 		var logged;
-		(function removeListeners() {
-			if(!hasHeaders && Date.now() < stopWait) {
+		(sendRequest.removeListeners = function removeListeners(forceRemove) {
+			if(!hasHeaders && Date.now() < stopWait && !forceRemove) {
 				// We should wait for great async API with onSendHeaders() after response
 				if(!logged) {
 					logged = true;
@@ -259,7 +260,8 @@ function sendRequest(url, referer, tabId) {
 				setTimeout(removeListeners, 10);
 				return;
 			}
-			_log("sendRequest.cleanup() -> removeListeners()");
+			_log("sendRequest.cleanup() -> removeListeners(" + (forceRemove || "") + ")");
+			sendRequest.removeListeners = null;
 			browser.webRequest.onSendHeaders.removeListener(onSendHeaders);
 			browser.webRequest.onBeforeRedirect.removeListener(onBeforeRedirect);
 		})();
