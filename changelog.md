@@ -6,6 +6,9 @@
 `*` – improved<br>
 
 ##### master/HEAD
+`x` Correctly stop wait for browser.webRequest.onSendHeaders in case of blocked request.<br>
+`+` Added support for selected text links (Firefox 60+).<br>
+
 ##### 2.0b2 (2019-01-26)
 `*` Updated hotkey validation: mark as invalid only if browser.commands.update() failed.<br>
 `+` Added ability to close tab/window using Esc key.<br>
