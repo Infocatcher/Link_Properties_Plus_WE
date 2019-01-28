@@ -6,6 +6,7 @@
 `*` – improved<br>
 
 ##### master/HEAD
+##### 2.0b3 (2019-01-28)
 `x` Correctly stop wait for browser.webRequest.onSendHeaders in case of blocked request.<br>
 `+` Added support for selected text links (Firefox 60+).<br>
 
