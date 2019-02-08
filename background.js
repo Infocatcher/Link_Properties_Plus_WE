@@ -17,18 +17,17 @@ browser.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 		sendResponse(sender.tab && sender.tab.id);
 });
 
-var canUpdateMenu = "onShown" in browser.contextMenus; // Firefox 60+
 var miLabel = browser.i18n.getMessage("linkProperties");
 browser.contextMenus.create({
 	id: "linkProperties",
 	title: miLabel,
 	contexts: ["link"]
 });
-if(canUpdateMenu) {
+if("onShown" in browser.contextMenus) try { // Firefox 60+
 	browser.contextMenus.create({
 		id: "linkProperties-selection",
 		title: miLabel,
-		visible: false,
+		visible: false, // Firefox 63+
 		contexts: ["selection"]
 	});
 	browser.contextMenus.onShown.addListener(function(info) {
@@ -45,6 +44,10 @@ if(canUpdateMenu) {
 		});
 		browser.contextMenus.refresh();
 	});
+}
+catch(e) {
+	if(!("" + e).includes('Unexpected property "visible"'))
+		console.error(e);
 }
 function getContextURI(info) {
 	return info.linkUrl || extractURI(info.selectionText);
