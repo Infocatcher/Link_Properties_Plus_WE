@@ -6,11 +6,13 @@ readPrefs(function() {
 });
 setTimeout(function() {
 	var root = document.documentElement;
-	var bg = window.getComputedStyle(root, null).backgroundColor;
-	if(/^rgb\((\d+), *(\d+), *(\d+)\)$/.test(bg)) {
+	var fc = getComputedStyle(root, null).color;
+	if(/^rgb\((\d+), *(\d+), *(\d+)\)$/.test(fc)) {
 		var r = +RegExp.$1, g = +RegExp.$2, b = +RegExp.$3;
-		var brightness = Math.max(r/255, g/255, b/255); // HSV, 0..1
-		if(brightness < 0.4)
+		// See https://github.com/bgrins/TinyColor/blob/1.4.1/tinycolor.js#L70 getBrightness()
+		// + https://github.com/bgrins/TinyColor/blob/1.4.1/tinycolor.js#L52 isDark()
+		var brightness = (r*299 + g*587 + b*114)/1000;
+		if(brightness >= 128)
 			root.classList.add("darkBG");
 	}
 }, 0);
