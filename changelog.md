@@ -6,6 +6,8 @@
 `*` – improved<br>
 
 ##### master/HEAD
+`x` Correctly handle not yet supported “visible” property for browser.contextMenus.create() in Firefox 60 – 62, context menu for selected text links will actually work only in Firefox 63+.<br>
+
 ##### 2.0b3 (2019-01-28)
 `x` Correctly stop wait for browser.webRequest.onSendHeaders in case of blocked request.<br>
 `+` Added support for selected text links (Firefox 60+).<br>
