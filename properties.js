@@ -292,7 +292,9 @@ function showProperties(request, error) {
 	else
 		[request, error] = showProperties.lastArgs || [];
 
-	var size = request._lpp.size = request._lpp.size || request.getResponseHeader("Content-Length");
+	var size = request._lpp.size = request._lpp.size
+		|| request.getResponseHeader("Content-Length")
+		|| request.getResponseHeader("X-Archive-Orig-Content-Length"); // Used by http://archive.org/
 	var intSize = parseInt(size);
 	if(intSize >= 0) {
 		size = formatNum(intSize, 0);
@@ -315,7 +317,7 @@ function showProperties(request, error) {
 
 	var date = request._lpp.date = request._lpp.date
 		|| request.getResponseHeader("Last-Modified")
-		|| request.getResponseHeader("X-Archive-Orig-Last-Modified")
+		|| request.getResponseHeader("X-Archive-Orig-Last-Modified") // Used by http://archive.org/
 		|| "";
 	var dt = date && new Date(date);
 	if(!dt || isNaN(dt))
