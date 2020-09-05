@@ -6,6 +6,8 @@
 `*` – улучшено<br>
 
 ##### master/HEAD
+`+` Добавлена поддержка заголовка “X-Archive-Orig-Content-Length” (используется на <a href="http://archive.org/">archive.org</a>).<br>
+
 ##### 2.0b4 (2019-02-08)
 `x` Исправлена обработка неподдерживаемого свойства «visible» для browser.contextMenus.create() в Firefox 60 – 62, контекстное меню для выделенных текстовых ссылок будет работать только в Firefox 63+.<br>
 
